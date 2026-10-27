@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Оформление заказа в магазине Зерно: выберите кофе или оборудование, способ доставки и оставьте контакты.">
+    <title>Оформление заказа — Зерно</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <!-- Bootstrap подключён локально из папки vendor -->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Свои стили подключаем ПОСЛЕ Bootstrap, чтобы можно было переопределять -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-coffee" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.svg" alt="" width="32" height="32">
+                Зерно
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Открыть меню">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="catalog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="catalog.html">Весь каталог</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="catalog.html#beans">Кофе в зёрнах</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#brewing">Для заваривания</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#accessories">Аксессуары</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                </ul>
+                <a href="order.html" class="btn btn-accent position-relative ms-lg-3 active" aria-current="page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag me-1" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    Корзина
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Шапка страницы с фоновой картинкой -->
+        <section class="page-header page-header-order">
+            <div class="container">
+                <h1 class="display-5 fw-bold">Оформление заказа</h1>
+                <p class="lead mb-3">Заполните форму — менеджер позвонит и подтвердит заказ.</p>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="catalog.html">Каталог</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Заказ</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row g-4 g-lg-5">
+                    <!-- Форма заказа -->
+                    <div class="col-12 col-lg-7">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4 p-md-5">
+                                <form class="needs-validation" id="orderForm" novalidate>
+                                    <div class="alert alert-success d-none form-success" role="alert">
+                                        <h2 class="alert-heading h5">Заказ отправлен!</h2>
+                                        <p class="mb-0">Спасибо! Менеджер позвонит в течение 15 минут, чтобы подтвердить заказ и время доставки.</p>
+                                    </div>
+
+                                    <h2 class="h4 mb-3">1. Контактные данные</h2>
+                                    <div class="row g-3">
+                                        <div class="col-12 col-md-6">
+                                            <label for="name" class="form-label">Имя</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Иван" required>
+                                            <div class="invalid-feedback">Введите имя</div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="email" class="form-label">E-mail</label>
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.ru" required>
+                                            <div class="invalid-feedback">Введите корректный e-mail</div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="phone" class="form-label">Телефон</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text">+7</span>
+                                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="900 000-00-00" required>
+                                                <div class="invalid-feedback">Введите номер телефона</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h2 class="h4 mt-5 mb-3">2. Товар</h2>
+                                    <div class="row g-3">
+                                        <div class="col-12 col-md-8">
+                                            <label for="product" class="form-label">Что заказываете</label>
+                                            <select class="form-select" id="product" name="product" required>
+                                                <option value="">Выберите товар</option>
+                                                <option value="ethiopia" data-price="990" data-name="Эфиопия Иргачеффе, 250 г" data-img="images/coffee-ethiopia.jpg">Эфиопия Иргачеффе — 990 ₽</option>
+                                                <option value="colombia" data-price="890" data-name="Колумбия Супремо, 250 г" data-img="images/coffee-colombia.jpg">Колумбия Супремо — 890 ₽</option>
+                                                <option value="brazil" data-price="790" data-name="Бразилия Сантос, 250 г" data-img="images/coffee-brazil.jpg">Бразилия Сантос — 790 ₽</option>
+                                                <option value="dripper" data-price="1890" data-name="Воронка с колбой" data-img="images/dripper.jpg">Воронка с колбой — 1 890 ₽</option>
+                                                <option value="french-press" data-price="1490" data-name="Френч-пресс 600 мл" data-img="images/french-press.jpg">Френч-пресс 600 мл — 1 490 ₽</option>
+                                                <option value="moka-pot" data-price="2290" data-name="Гейзерная кофеварка" data-img="images/moka-pot.jpg">Гейзерная кофеварка — 2 290 ₽</option>
+                                                <option value="kettle" data-price="2990" data-name="Чайник с узким носиком" data-img="images/kettle.jpg">Чайник с узким носиком — 2 990 ₽</option>
+                                                <option value="grinder" data-price="2490" data-name="Ручная кофемолка" data-img="images/grinder.jpg">Ручная кофемолка — 2 490 ₽</option>
+                                                <option value="mugs" data-price="1290" data-name="Набор кружек, 2 шт." data-img="images/mugs.jpg">Набор кружек — 1 290 ₽</option>
+                                            </select>
+                                            <div class="invalid-feedback">Выберите товар</div>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label for="quantity" class="form-label">Количество</label>
+                                            <div class="input-group">
+                                                <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" max="20">
+                                                <span class="input-group-text">шт.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-8">
+                                            <label for="grind" class="form-label">Помол (для кофе)</label>
+                                            <select class="form-select" id="grind" name="grind">
+                                                <option value="beans" selected>В зёрнах</option>
+                                                <option value="filter">Для фильтра</option>
+                                                <option value="espresso">Для эспрессо</option>
+                                                <option value="turka">Для турки</option>
+                                                <option value="press">Для френч-пресса</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <h2 class="h4 mt-5 mb-3">3. Доставка</h2>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="delivery" id="deliveryCourier" value="courier" checked>
+                                        <label class="form-check-label" for="deliveryCourier">Курьером — 300 ₽, бесплатно от 3&nbsp;000&nbsp;₽</label>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="delivery" id="deliveryPickup" value="pickup">
+                                        <label class="form-check-label" for="deliveryPickup">Самовывоз из обжарочной — бесплатно</label>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">Адрес доставки</label>
+                                        <input type="text" class="form-control" id="address" name="address" placeholder="Город, улица, дом, квартира">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="comment" class="form-label">Комментарий</label>
+                                        <textarea class="form-control" id="comment" name="comment" rows="4" placeholder="Удобное время доставки, код домофона"></textarea>
+                                    </div>
+
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="agree" name="agree" required>
+                                        <label class="form-check-label" for="agree">Согласен на обработку персональных данных</label>
+                                        <div class="invalid-feedback">Без согласия мы не сможем принять заказ</div>
+                                    </div>
+                                    <div class="form-check form-switch mb-4">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="news" name="news">
+                                        <label class="form-check-label" for="news">Присылать новости о новых сортах</label>
+                                    </div>
+
+                                    <div class="d-grid d-md-block">
+                                        <button type="submit" class="btn btn-primary btn-lg px-5">Отправить заказ</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Итог заказа (на больших экранах прилипает и едет рядом с формой) -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card border-0 shadow-sm sticky-lg-top order-summary">
+                            <div class="card-body p-4">
+                                <h2 class="h4 mb-3">Ваш заказ</h2>
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <img src="images/ethiopia-beans.jpg" alt="" class="summary-img" id="summaryImg">
+                                    <div>
+                                        <div class="fw-semibold" id="summaryName">Товар не выбран</div>
+                                        <div class="text-secondary small" id="summaryQty">Выберите товар в форме</div>
+                                    </div>
+                                </div>
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item bg-transparent px-0 d-flex justify-content-between">
+                                        <span>Товары</span>
+                                        <span id="summarySum">0 ₽</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent px-0 d-flex justify-content-between">
+                                        <span>Доставка</span>
+                                        <span id="summaryDelivery">—</span>
+                                    </li>
+                                    <li class="list-group-item bg-transparent px-0 d-flex justify-content-between fs-5 fw-bold">
+                                        <span>Итого</span>
+                                        <span id="summaryTotal">0 ₽</span>
+                                    </li>
+                                </ul>
+                                <div class="alert alert-info small mb-3" role="alert">
+                                    Курьерская доставка бесплатна при заказе от 3&nbsp;000&nbsp;₽.
+                                </div>
+                                <p class="small text-secondary mb-0">Оплата при получении: картой или наличными. Перед отправкой менеджер ещё раз проверит заказ по телефону.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer-coffee pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-md-6 col-lg-5">
+                    <a class="navbar-brand d-flex align-items-center gap-2 text-white fs-4 mb-3" href="index.html">
+                        <img src="images/logo.svg" alt="" width="32" height="32">
+                        Зерно
+                    </a>
+                    <p class="mb-0">Свежеобжаренный кофе и всё для заваривания. Обжариваем каждый четверг и отправляем по всей России.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <h3 class="h6 text-white text-uppercase mb-3">Магазин</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="catalog.html">Каталог</a></li>
+                        <li class="mb-2"><a href="order.html">Оформить заказ</a></li>
+                        <li class="mb-2"><a href="index.html#faq">Частые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-4">
+                    <h3 class="h6 text-white text-uppercase mb-3">Контакты</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">г. Москва, ул. Примерная, д. 1</li>
+                        <li class="mb-2"><a href="tel:+79000000000">+7 (900) 000-00-00</a></li>
+                        <li class="mb-2"><a href="mailto:hello@example.com">hello@example.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <p class="small mb-0 text-center">© 2026 Зерно. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <!-- Кнопка «Наверх» -->
+    <a href="#" class="btn btn-primary rounded-circle shadow to-top" aria-label="Наверх">↑</a>
+
+    <!-- Bootstrap JS (нужен для меню) -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

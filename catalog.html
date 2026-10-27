@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог магазина Зерно: кофе в зёрнах, воронки, френч-прессы, гейзерные кофеварки, кофемолки и аксессуары.">
+    <title>Каталог — Зерно</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <!-- Bootstrap подключён локально из папки vendor -->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Свои стили подключаем ПОСЛЕ Bootstrap, чтобы можно было переопределять -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-coffee" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.svg" alt="" width="32" height="32">
+                Зерно
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Открыть меню">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" aria-current="page" href="catalog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="catalog.html">Весь каталог</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="catalog.html#beans">Кофе в зёрнах</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#brewing">Для заваривания</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#accessories">Аксессуары</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                </ul>
+                <a href="order.html" class="btn btn-accent position-relative ms-lg-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag me-1" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    Корзина
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Шапка страницы с фоновой картинкой -->
+        <section class="page-header page-header-catalog">
+            <div class="container">
+                <h1 class="display-5 fw-bold">Каталог</h1>
+                <p class="lead mb-3">Кофе свежей обжарки и всё, чтобы заварить его дома.</p>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Каталог</li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <!-- Фильтр по категориям (кнопки, работает через main.js) -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-outline-dark filter-btn active" data-filter="all">Все товары</button>
+                        <button type="button" class="btn btn-outline-dark filter-btn" data-filter="beans">Кофе в зёрнах</button>
+                        <button type="button" class="btn btn-outline-dark filter-btn" data-filter="brewing">Для заваривания</button>
+                        <button type="button" class="btn btn-outline-dark filter-btn" data-filter="accessories">Аксессуары</button>
+                    </div>
+                    <p class="text-secondary mb-0">Показано товаров: <span class="fw-bold" id="productCount">9</span></p>
+                </div>
+
+                <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-info-circle flex-shrink-0" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                    </svg>
+                    <div>Кофе обжариваем каждый четверг. Дата обжарки указана на каждой пачке.</div>
+                </div>
+
+                <!-- Карточки товаров -->
+                <div class="row g-4">
+                    <!-- Кофе в зёрнах -->
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="beans">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/coffee-ethiopia.jpg" class="card-img-top" alt="Пачка кофе Эфиопия Иргачеффе" loading="lazy">
+                                <span class="badge text-bg-danger position-absolute top-0 start-0 m-3 badge-pulse">Хит</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Кофе в зёрнах · 250 г</p>
+                                <h2 class="h5 card-title">Эфиопия Иргачеффе</h2>
+                                <p class="card-text text-secondary">Цветочный аромат, нотки бергамота и лимона. Светлая обжарка под фильтр.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">990 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="ethiopia" data-name="Эфиопия Иргачеффе">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="beans">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/coffee-colombia.jpg" class="card-img-top" alt="Открытая пачка кофе Колумбия Супремо" loading="lazy">
+                                <span class="badge text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Кофе в зёрнах · 250 г</p>
+                                <h2 class="h5 card-title">Колумбия Супремо</h2>
+                                <p class="card-text text-secondary">Сбалансированный вкус: карамель, орех и молочный шоколад.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">890 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="colombia" data-name="Колумбия Супремо">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="beans">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/coffee-brazil.jpg" class="card-img-top" alt="Открытая пачка кофе Бразилия Сантос" loading="lazy">
+                                <span class="badge text-bg-warning position-absolute top-0 start-0 m-3">−20%</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Кофе в зёрнах · 250 г</p>
+                                <h2 class="h5 card-title">Бразилия Сантос</h2>
+                                <p class="card-text text-secondary">Плотное тело и шоколадное послевкусие. Для эспрессо и турки.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <span class="d-block text-muted text-decoration-line-through small">990 ₽</span>
+                                        <span class="fs-5 fw-bold text-danger">790 ₽</span>
+                                    </span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="brazil" data-name="Бразилия Сантос">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Для заваривания -->
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="brewing">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/dripper.jpg" class="card-img-top" alt="Стеклянная воронка с молотым кофе и колба" loading="lazy">
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Для заваривания</p>
+                                <h2 class="h5 card-title">Воронка с колбой</h2>
+                                <p class="card-text text-secondary">Стеклянная воронка и колба на 600 мл для заваривания пуровером.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">1 890 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="dripper" data-name="Воронка с колбой">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="brewing">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/french-press.jpg" class="card-img-top" alt="Френч-пресс с кофе на деревянном столе" loading="lazy">
+                                <span class="badge text-bg-danger position-absolute top-0 start-0 m-3 badge-pulse">Хит</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Для заваривания</p>
+                                <h2 class="h5 card-title">Френч-пресс 600 мл</h2>
+                                <p class="card-text text-secondary">Термостойкое стекло и стальной фильтр. Простой способ заварить кофе дома.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">1 490 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="french-press" data-name="Френч-пресс 600 мл">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="brewing">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/moka-pot.jpg" class="card-img-top" alt="Гейзерная кофеварка и белая кружка" loading="lazy">
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Для заваривания</p>
+                                <h2 class="h5 card-title">Гейзерная кофеварка</h2>
+                                <p class="card-text text-secondary">Кофеварка на 3 чашки для плиты. Крепкий кофе как в Италии.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">2 290 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="moka-pot" data-name="Гейзерная кофеварка">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Аксессуары -->
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="accessories">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/kettle.jpg" class="card-img-top" alt="Чайник с узким носиком на газовой горелке" loading="lazy">
+                                <span class="badge text-bg-warning position-absolute top-0 start-0 m-3">−15%</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Аксессуары</p>
+                                <h2 class="h5 card-title">Чайник с узким носиком</h2>
+                                <p class="card-text text-secondary">Тонкая ровная струя для пуровера, объём 1 л, подходит для газовой плиты.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <span class="d-block text-muted text-decoration-line-through small">3 490 ₽</span>
+                                        <span class="fs-5 fw-bold text-danger">2 990 ₽</span>
+                                    </span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="kettle" data-name="Чайник с узким носиком">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="accessories">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/grinder.jpg" class="card-img-top" alt="Ручная кофемолка с кофейными зёрнами" loading="lazy">
+                                <span class="badge text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Аксессуары</p>
+                                <h2 class="h5 card-title">Ручная кофемолка</h2>
+                                <p class="card-text text-secondary">Классическая кофемолка с регулировкой помола от эспрессо до френч-пресса.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">2 490 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="grinder" data-name="Ручная кофемолка">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 product-item reveal" data-category="accessories">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/mugs.jpg" class="card-img-top" alt="Две керамические кружки с узором" loading="lazy">
+                                <span class="badge text-bg-info position-absolute top-0 start-0 m-3">Ручная работа</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Аксессуары · 2 шт.</p>
+                                <h2 class="h5 card-title">Набор кружек</h2>
+                                <p class="card-text text-secondary">Керамические кружки по 300 мл с ручной росписью.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">1 290 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="mugs" data-name="Набор кружек">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Блок с предложением помочь с выбором -->
+                <div class="help-box text-white rounded-4 p-4 p-md-5 mt-5 reveal">
+                    <div class="row align-items-center g-4">
+                        <div class="col-12 col-lg-8">
+                            <h2 class="h3 fw-bold">Не знаете, что выбрать?</h2>
+                            <p class="mb-0">Расскажите, как вы завариваете кофе и какой вкус любите, — подберём сорт и помол.</p>
+                        </div>
+                        <div class="col-12 col-lg-4 text-lg-end">
+                            <a href="contacts.html" class="btn btn-accent btn-lg">Написать нам</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer-coffee pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-md-6 col-lg-5">
+                    <a class="navbar-brand d-flex align-items-center gap-2 text-white fs-4 mb-3" href="index.html">
+                        <img src="images/logo.svg" alt="" width="32" height="32">
+                        Зерно
+                    </a>
+                    <p class="mb-0">Свежеобжаренный кофе и всё для заваривания. Обжариваем каждый четверг и отправляем по всей России.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <h3 class="h6 text-white text-uppercase mb-3">Магазин</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="catalog.html">Каталог</a></li>
+                        <li class="mb-2"><a href="order.html">Оформить заказ</a></li>
+                        <li class="mb-2"><a href="index.html#faq">Частые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-4">
+                    <h3 class="h6 text-white text-uppercase mb-3">Контакты</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">г. Москва, ул. Примерная, д. 1</li>
+                        <li class="mb-2"><a href="tel:+79000000000">+7 (900) 000-00-00</a></li>
+                        <li class="mb-2"><a href="mailto:hello@example.com">hello@example.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <p class="small mb-0 text-center">© 2026 Зерно. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <!-- Уведомление «добавлено в корзину» (toast) -->
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+        <div id="cartToast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <span id="toastText">Товар добавлен в корзину</span>
+                    <a href="order.html" id="toastLink" class="link-warning ms-2">Оформить</a>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка «Наверх» -->
+    <a href="#" class="btn btn-primary rounded-circle shadow to-top" aria-label="Наверх">↑</a>
+
+    <!-- Bootstrap JS (нужен для меню и уведомлений) -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

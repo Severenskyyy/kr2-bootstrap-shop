@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Кофе Эфиопия Иргачеффе свежей обжарки: описание, характеристики, рецепт заваривания и цена.">
+    <title>Эфиопия Иргачеффе — Зерно</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <!-- Bootstrap подключён локально из папки vendor -->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Свои стили подключаем ПОСЛЕ Bootstrap, чтобы можно было переопределять -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-coffee" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.svg" alt="" width="32" height="32">
+                Зерно
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Открыть меню">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="catalog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="catalog.html">Весь каталог</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="catalog.html#beans">Кофе в зёрнах</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#brewing">Для заваривания</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#accessories">Аксессуары</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                </ul>
+                <a href="order.html" class="btn btn-accent position-relative ms-lg-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag me-1" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    Корзина
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="py-4 py-lg-5">
+            <div class="container">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="catalog.html">Каталог</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Эфиопия Иргачеффе</li>
+                    </ol>
+                </nav>
+
+                <div class="row g-4 g-lg-5">
+                    <!-- Фотографии товара: прокручиваются, а блок справа «едет» рядом -->
+                    <div class="col-12 col-lg-7">
+                        <!-- на телефоне: одно большое фото и два маленьких в ряд, на компьютере — все друг под другом -->
+                        <div class="row g-3 g-lg-4 product-gallery">
+                            <div class="col-12">
+                                <img src="images/coffee-ethiopia.jpg" class="img-fluid rounded-4 shadow-sm" alt="Пачка кофе Эфиопия Иргачеффе">
+                            </div>
+                            <div class="col-6 col-lg-12">
+                                <img src="images/ethiopia-beans.jpg" class="img-fluid rounded-4 shadow-sm" alt="Обжаренные зёрна крупным планом" loading="lazy">
+                            </div>
+                            <div class="col-6 col-lg-12">
+                                <img src="images/ethiopia-brew.jpg" class="img-fluid rounded-4 shadow-sm" alt="Заваривание кофе в воронке" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Информация о товаре (sticky-lg-top — прилипает на больших экранах) -->
+                    <div class="col-12 col-lg-5">
+                        <div class="card border-0 shadow-sm sticky-lg-top product-info">
+                            <div class="card-body p-4">
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <span class="badge text-bg-danger badge-pulse">Хит продаж</span>
+                                    <span class="badge text-bg-success">Свежая обжарка</span>
+                                    <span class="badge text-bg-light border">Под фильтр</span>
+                                </div>
+                                <h1 class="h2 fw-bold">Эфиопия Иргачеффе</h1>
+                                <p class="text-secondary">Светлая обжарка · 250 г · арабика</p>
+                                <p class="display-6 fw-bold text-coffee mb-3">990 ₽</p>
+                                <p>Яркий и чистый вкус с ароматом жасмина, нотками бергамота и лимонной кислинкой. Отлично раскрывается в воронке и аэропрессе.</p>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label for="weight" class="form-label">Вес</label>
+                                        <select class="form-select" id="weight" name="weight">
+                                            <option value="250" selected>250 г — 990 ₽</option>
+                                            <option value="500">500 г — 1 890 ₽</option>
+                                            <option value="1000">1 кг — 3 590 ₽</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label for="grind" class="form-label">Помол</label>
+                                        <select class="form-select" id="grind" name="grind">
+                                            <option value="beans" selected>В зёрнах</option>
+                                            <option value="filter">Для фильтра</option>
+                                            <option value="espresso">Для эспрессо</option>
+                                            <option value="turka">Для турки</option>
+                                            <option value="press">Для френч-пресса</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label for="productQty" class="form-label">Количество</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="productQty" name="quantity" value="1" min="1" max="20">
+                                            <span class="input-group-text">шт.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 mb-3">
+                                    <button type="button" class="btn btn-primary btn-lg add-to-cart" data-id="ethiopia" data-name="Эфиопия Иргачеффе">Добавить в корзину</button>
+                                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#quickOrderModal">Купить в один клик</button>
+                                </div>
+
+                                <div class="alert alert-warning small mb-3" role="alert">
+                                    Осталось 7 пачек этой обжарки. Следующая партия — в четверг.
+                                </div>
+
+                                <ul class="list-unstyled small text-secondary mb-0">
+                                    <li class="mb-1">✔ Доставка по Москве — на следующий день</li>
+                                    <li class="mb-1">✔ Бесплатно при заказе от 3&nbsp;000&nbsp;₽</li>
+                                    <li>✔ Обмен, если вкус не понравится</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Вкладки: описание, характеристики, рецепт -->
+        <section class="pb-5">
+            <div class="container">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button" role="tab" aria-controls="desc" aria-selected="true">Описание</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab" aria-controls="specs" aria-selected="false">Характеристики</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="recipe-tab" data-bs-toggle="tab" data-bs-target="#recipe" type="button" role="tab" aria-controls="recipe" aria-selected="false">Как заварить</button>
+                    </li>
+                </ul>
+                <div class="tab-content bg-white p-4 rounded-bottom shadow-sm" id="productTabsContent">
+                    <div class="tab-pane fade show active" id="desc" role="tabpanel" aria-labelledby="desc-tab" tabindex="0">
+                        <h2 class="h4">О кофе</h2>
+                        <p>Иргачеффе — один из самых известных кофейных регионов Эфиопии. Кофе растёт высоко в горах, медленно созревает и получает яркий аромат.</p>
+                        <p class="mb-0">Мы обжариваем это зерно светло, чтобы сохранить цветочные ноты и мягкую кислотность. Если вы привыкли к тёмной обжарке, попробуйте — вкус удивит.</p>
+                    </div>
+                    <div class="tab-pane fade" id="specs" role="tabpanel" aria-labelledby="specs-tab" tabindex="0">
+                        <h2 class="h4">Характеристики</h2>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover align-middle mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Страна</th>
+                                        <td>Эфиопия</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Регион</th>
+                                        <td>Иргачеффе</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Вид</th>
+                                        <td>100% арабика</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Обработка</th>
+                                        <td>Мытая</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Высота произрастания</th>
+                                        <td>1750–2200 м</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Обжарка</th>
+                                        <td>Светлая, под фильтр</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Вкус</th>
+                                        <td>Жасмин, бергамот, лимон</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Вес</th>
+                                        <td>250 г, 500 г или 1 кг</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="recipe" role="tabpanel" aria-labelledby="recipe-tab" tabindex="0">
+                        <h2 class="h4">Рецепт для воронки</h2>
+                        <ol class="mb-0">
+                            <li>Смелите 15 г кофе средне-мелко, как крупную соль.</li>
+                            <li>Нагрейте 250 мл воды до 92–94 °C.</li>
+                            <li>Залейте 30 мл воды и подождите 30 секунд — кофе «раскроется».</li>
+                            <li>Тонкой струёй долейте остальную воду за 1,5–2 минуты.</li>
+                            <li>Общее время — около 3 минут. Готово!</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- С этим покупают -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <h2 class="h3 fw-bold mb-4 reveal">С этим покупают</h2>
+                <div class="row g-4">
+                    <div class="col-12 col-md-4 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/dripper.jpg" class="card-img-top" alt="Стеклянная воронка с молотым кофе и колба" loading="lazy">
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="h5 card-title">Воронка с колбой</h3>
+                                <p class="card-text text-secondary">Для заваривания пуровером.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">1 890 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="dripper" data-name="Воронка с колбой">В корзину</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/kettle.jpg" class="card-img-top" alt="Чайник с узким носиком на газовой горелке" loading="lazy">
+                                <span class="badge text-bg-warning position-absolute top-0 start-0 m-3">−15%</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="h5 card-title">Чайник с узким носиком</h3>
+                                <p class="card-text text-secondary">Тонкая струя для пуровера.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold text-danger">2 990 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="kettle" data-name="Чайник с узким носиком">В корзину</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/grinder.jpg" class="card-img-top" alt="Ручная кофемолка с кофейными зёрнами" loading="lazy">
+                                <span class="badge text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h3 class="h5 card-title">Ручная кофемолка</h3>
+                                <p class="card-text text-secondary">Регулировка помола под любой способ.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">2 490 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="grinder" data-name="Ручная кофемолка">В корзину</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer-coffee pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-md-6 col-lg-5">
+                    <a class="navbar-brand d-flex align-items-center gap-2 text-white fs-4 mb-3" href="index.html">
+                        <img src="images/logo.svg" alt="" width="32" height="32">
+                        Зерно
+                    </a>
+                    <p class="mb-0">Свежеобжаренный кофе и всё для заваривания. Обжариваем каждый четверг и отправляем по всей России.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <h3 class="h6 text-white text-uppercase mb-3">Магазин</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="catalog.html">Каталог</a></li>
+                        <li class="mb-2"><a href="order.html">Оформить заказ</a></li>
+                        <li class="mb-2"><a href="index.html#faq">Частые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-4">
+                    <h3 class="h6 text-white text-uppercase mb-3">Контакты</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">г. Москва, ул. Примерная, д. 1</li>
+                        <li class="mb-2"><a href="tel:+79000000000">+7 (900) 000-00-00</a></li>
+                        <li class="mb-2"><a href="mailto:hello@example.com">hello@example.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <p class="small mb-0 text-center">© 2026 Зерно. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно: покупка в один клик -->
+    <div class="modal fade" id="quickOrderModal" tabindex="-1" role="dialog" aria-labelledby="quickOrderLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="quickOrderLabel">Купить в один клик</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" novalidate>
+                        <div class="alert alert-success d-none form-success" role="alert">Спасибо! Перезвоним в течение 15 минут, чтобы подтвердить заказ.</div>
+                        <div class="d-flex align-items-center gap-3 mb-3 p-2 bg-light rounded-3">
+                            <img src="images/coffee-ethiopia.jpg" alt="" class="summary-img">
+                            <div>
+                                <div class="fw-semibold">Эфиопия Иргачеффе, 250 г</div>
+                                <div class="text-secondary small">990 ₽</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quickName" class="form-label">Имя</label>
+                            <input type="text" class="form-control" id="quickName" name="name" placeholder="Иван" required>
+                            <div class="invalid-feedback">Введите имя</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="quickPhone" class="form-label">Телефон</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">+7</span>
+                                <input type="tel" class="form-control" id="quickPhone" name="phone" placeholder="900 000-00-00" required>
+                                <div class="invalid-feedback">Введите номер телефона</div>
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="quickAgree" name="agree" required>
+                            <label class="form-check-label" for="quickAgree">Согласен на обработку персональных данных</label>
+                            <div class="invalid-feedback">Нужно согласие</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Жду звонка</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление «добавлено в корзину» (toast) -->
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+        <div id="cartToast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <span id="toastText">Товар добавлен в корзину</span>
+                    <a href="order.html" id="toastLink" class="link-warning ms-2">Оформить</a>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка «Наверх» -->
+    <a href="#" class="btn btn-primary rounded-circle shadow to-top" aria-label="Наверх">↑</a>
+
+    <!-- Bootstrap JS (нужен для меню, вкладок, модального окна и уведомлений) -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

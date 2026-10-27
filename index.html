@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Зерно — магазин свежеобжаренного кофе и всего для заваривания. Обжариваем каждый четверг, доставляем за 1–3 дня.">
+    <title>Зерно — свежеобжаренный кофе</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <!-- Bootstrap подключён локально из папки vendor -->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Свои стили подключаем ПОСЛЕ Bootstrap, чтобы можно было переопределять -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+    <!-- Сообщение сверху (alert, можно закрыть крестиком) -->
+    <div class="alert alert-warning alert-dismissible fade show rounded-0 mb-0 text-center py-2 promo-alert" role="alert">
+        <strong>Бесплатная доставка</strong> при заказе от 3&nbsp;000&nbsp;₽ · Свежая обжарка каждый четверг
+        <button type="button" class="btn-close py-2" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+    </div>
+
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-coffee" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img src="images/logo.svg" alt="" width="32" height="32">
+                Зерно
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Открыть меню">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Главная</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="catalog.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Каталог</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="catalog.html">Весь каталог</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="catalog.html#beans">Кофе в зёрнах</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#brewing">Для заваривания</a></li>
+                            <li><a class="dropdown-item" href="catalog.html#accessories">Аксессуары</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                </ul>
+                <a href="order.html" class="btn btn-accent position-relative ms-lg-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag me-1" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    Корзина
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero-блок: карусель из трёх слайдов -->
+        <section id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Слайд 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Слайд 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Слайд 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="6000">
+                    <img src="images/hero-1.jpg" class="d-block w-100 hero-slide" alt="Обжаренные кофейные зёрна">
+                    <div class="carousel-caption hero-caption">
+                        <span class="badge text-bg-warning mb-3">Обжарка каждый четверг</span>
+                        <h1 class="display-4 fw-bold">Кофе, обжаренный на этой неделе</h1>
+                        <p class="lead mb-4">Отбираем зерно с лучших ферм и обжариваем небольшими партиями, чтобы оно доехало до вас свежим.</p>
+                        <a href="catalog.html" class="btn btn-accent btn-lg me-2 mb-2">Выбрать кофе</a>
+                        <a href="#story" class="btn btn-outline-light btn-lg mb-2">Как мы работаем</a>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="6000">
+                    <img src="images/hero-2.jpg" class="d-block w-100 hero-slide" alt="Бариста рисует латте-арт">
+                    <div class="carousel-caption hero-caption">
+                        <span class="badge text-bg-warning mb-3">Новые сорта</span>
+                        <h2 class="display-4 fw-bold">Каждая чашка — как в любимой кофейне</h2>
+                        <p class="lead mb-4">Подберём зерно под ваш способ заваривания: эспрессо, турка, пуровер или френч-пресс.</p>
+                        <a href="catalog.html#beans" class="btn btn-accent btn-lg mb-2">Кофе в зёрнах</a>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="6000">
+                    <img src="images/hero-3.jpg" class="d-block w-100 hero-slide" alt="Кофейная стойка с кофемашиной и пачками кофе">
+                    <div class="carousel-caption hero-caption">
+                        <span class="badge text-bg-warning mb-3">Всё для заваривания</span>
+                        <h2 class="display-4 fw-bold">Воронки, турки, кофемолки</h2>
+                        <p class="lead mb-4">Всё, что нужно, чтобы готовить вкусный кофе дома, а не только в кофейне.</p>
+                        <a href="catalog.html#brewing" class="btn btn-accent btn-lg mb-2">Смотреть оборудование</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Предыдущий слайд</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Следующий слайд</span>
+            </button>
+        </section>
+
+        <!-- Бегущая строка (текст повторяется два раза, чтобы не было разрыва) -->
+        <div class="ticker">
+            <div class="ticker-line">
+                <span>Свежая обжарка каждый четверг</span>
+                <span>☕</span>
+                <span>Бесплатная доставка от 3 000 ₽</span>
+                <span>☕</span>
+                <span>Помолем под ваш способ заваривания</span>
+                <span>☕</span>
+                <span>12 стран происхождения</span>
+                <span>☕</span>
+                <span>Свежая обжарка каждый четверг</span>
+                <span>☕</span>
+                <span>Бесплатная доставка от 3 000 ₽</span>
+                <span>☕</span>
+                <span>Помолем под ваш способ заваривания</span>
+                <span>☕</span>
+                <span>12 стран происхождения</span>
+                <span>☕</span>
+            </div>
+        </div>
+
+        <!-- Преимущества -->
+        <section class="py-5" id="advantages">
+            <div class="container py-lg-4">
+                <div class="text-center mb-5 reveal">
+                    <p class="text-uppercase fw-semibold text-accent mb-2">Почему мы</p>
+                    <h2 class="display-6 fw-bold">Кофе, за который не стыдно</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-3 reveal">
+                        <div class="card h-100 border-0 text-center p-4 feature-card">
+                            <div class="feature-icon rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                                    <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/>
+                                </svg>
+                            </div>
+                            <h3 class="h5">Свежая обжарка</h3>
+                            <p class="text-secondary mb-0">Обжариваем каждый четверг и отправляем в течение 48 часов.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 reveal">
+                        <div class="card h-100 border-0 text-center p-4 feature-card">
+                            <div class="feature-icon rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                                </svg>
+                            </div>
+                            <h3 class="h5">Быстрая доставка</h3>
+                            <p class="text-secondary mb-0">По Москве за 1 день, по России — от 2 до 5 дней.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 reveal">
+                        <div class="card h-100 border-0 text-center p-4 feature-card">
+                            <div class="feature-icon rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-award" viewBox="0 0 16 16">
+                                    <path d="M9.669.864 8 0 6.331.864l-1.858.282-.842 1.68-1.337 1.32L2.6 6l-.306 1.854 1.337 1.32.842 1.68 1.858.282L8 12l1.669-.864 1.858-.282.842-1.68 1.337-1.32L13.4 6l.306-1.854-1.337-1.32-.842-1.68zm1.196 1.193.684 1.365 1.086 1.072L12.387 6l.248 1.506-1.086 1.072-.684 1.365-1.51.229L8 10.874l-1.355-.702-1.51-.229-.684-1.365-1.086-1.072L3.614 6l-.25-1.506 1.087-1.072.684-1.365 1.51-.229L8 1.126l1.356.702z"/>
+                                    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+                                </svg>
+                            </div>
+                            <h3 class="h5">Только арабика</h3>
+                            <p class="text-secondary mb-0">Берём зерно с оценкой от 80 баллов по шкале SCA.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 reveal">
+                        <div class="card h-100 border-0 text-center p-4 feature-card">
+                            <div class="feature-icon rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-shield-check" viewBox="0 0 16 16">
+                                    <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
+                                    <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                                </svg>
+                            </div>
+                            <h3 class="h5">Вернём деньги</h3>
+                            <p class="text-secondary mb-0">Если кофе не понравится — обменяем пачку или вернём оплату.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Популярные товары -->
+        <section class="py-5 bg-white" id="popular">
+            <div class="container py-lg-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4 reveal">
+                    <div>
+                        <p class="text-uppercase fw-semibold text-accent mb-2">Хиты недели</p>
+                        <h2 class="display-6 fw-bold mb-0">Популярные товары</h2>
+                    </div>
+                    <a href="catalog.html" class="btn btn-outline-dark">Весь каталог →</a>
+                </div>
+                <div class="row g-4">
+                    <div class="col-12 col-sm-6 col-lg-3 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/coffee-ethiopia.jpg" class="card-img-top" alt="Пачка кофе Эфиопия Иргачеффе" loading="lazy">
+                                <span class="badge text-bg-danger position-absolute top-0 start-0 m-3 badge-pulse">Хит</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Кофе в зёрнах · 250 г</p>
+                                <h3 class="h5 card-title">Эфиопия Иргачеффе</h3>
+                                <p class="card-text text-secondary">Цветочный аромат, нотки бергамота и лимона.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">990 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="ethiopia" data-name="Эфиопия Иргачеффе">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/coffee-brazil.jpg" class="card-img-top" alt="Открытая пачка кофе Бразилия Сантос" loading="lazy">
+                                <span class="badge text-bg-warning position-absolute top-0 start-0 m-3">−20%</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Кофе в зёрнах · 250 г</p>
+                                <h3 class="h5 card-title">Бразилия Сантос</h3>
+                                <p class="card-text text-secondary">Шоколад и орех. Отлично подходит для эспрессо и турки.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <span class="d-block text-muted text-decoration-line-through small">990 ₽</span>
+                                        <span class="fs-5 fw-bold text-danger">790 ₽</span>
+                                    </span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="brazil" data-name="Бразилия Сантос">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/french-press.jpg" class="card-img-top" alt="Френч-пресс с кофе на деревянном столе" loading="lazy">
+                                <span class="badge text-bg-danger position-absolute top-0 start-0 m-3 badge-pulse">Хит</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Для заваривания</p>
+                                <h3 class="h5 card-title">Френч-пресс 600 мл</h3>
+                                <p class="card-text text-secondary">Самый простой способ заварить вкусный кофе дома.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span class="fs-5 fw-bold">1 490 ₽</span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="french-press" data-name="Френч-пресс 600 мл">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3 reveal">
+                        <div class="card h-100 product-card">
+                            <div class="product-img position-relative">
+                                <img src="images/kettle.jpg" class="card-img-top" alt="Чайник с узким носиком на газовой горелке" loading="lazy">
+                                <span class="badge text-bg-warning position-absolute top-0 start-0 m-3">−15%</span>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <p class="small text-uppercase text-muted mb-1">Аксессуары</p>
+                                <h3 class="h5 card-title">Чайник с узким носиком</h3>
+                                <p class="card-text text-secondary">Тонкая ровная струя — главное для пуровера.</p>
+                                <div class="mt-auto d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <span class="d-block text-muted text-decoration-line-through small">3 490 ₽</span>
+                                        <span class="fs-5 fw-bold text-danger">2 990 ₽</span>
+                                    </span>
+                                    <button type="button" class="btn btn-primary btn-sm add-to-cart" data-id="kettle" data-name="Чайник с узким носиком">В корзину</button>
+                                </div>
+                                <a href="product.html" class="btn btn-outline-dark btn-sm mt-3">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- От зерна до чашки: текст «прилипает» и едет по фоновой картинке -->
+        <section id="story">
+            <div class="container text-center py-5">
+                <p class="text-uppercase fw-semibold text-accent mb-2">Как мы работаем</p>
+                <h2 class="display-6 fw-bold mb-3">От зерна до чашки</h2>
+                <p class="text-secondary mx-auto story-intro">Прокрутите вниз — расскажем, какой путь проходит кофе, прежде чем попасть к вам.</p>
+            </div>
+
+            <div class="story-step story-farm">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-12 col-md-8 col-lg-5">
+                            <div class="story-card">
+                                <div class="story-number">01</div>
+                                <h3 class="h2">Ферма</h3>
+                                <p>Кофейные ягоды собирают вручную, когда они становятся ярко-красными. Мы работаем с фермами Эфиопии, Колумбии и Бразилии и знаем, откуда приехала каждая партия.</p>
+                                <span class="badge rounded-pill text-bg-success">Высота 1500–2200 м</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-step story-roast">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-12 col-md-8 col-lg-5 offset-md-4 offset-lg-7">
+                            <div class="story-card">
+                                <div class="story-number">02</div>
+                                <h3 class="h2">Обжарка</h3>
+                                <p>Обжариваем зерно небольшими партиями по 15 кг. Для фильтра — светлее, чтобы раскрыть кислотность, для эспрессо — темнее, чтобы вкус был плотным и шоколадным.</p>
+                                <span class="badge rounded-pill text-bg-warning">Каждый четверг</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-step story-brew">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-12 col-md-8 col-lg-5">
+                            <div class="story-card">
+                                <div class="story-number">03</div>
+                                <h3 class="h2">Ваша чашка</h3>
+                                <p>Через 1–3 дня кофе у вас. Осталось смолоть зерно, залить водой 92–94 °C и подождать пару минут. Подскажем рецепт под любой способ заваривания.</p>
+                                <a href="catalog.html" class="btn btn-primary">Выбрать кофе</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section class="py-5" id="about">
+            <div class="container py-lg-5">
+                <div class="row align-items-center gx-lg-5 gy-4">
+                    <div class="col-12 col-lg-5 reveal">
+                        <img src="images/about.jpg" class="img-fluid rounded-4 shadow about-img" alt="Ростер остужает свежеобжаренные зёрна" loading="lazy">
+                    </div>
+                    <div class="col-12 col-lg-7 reveal">
+                        <p class="text-uppercase fw-semibold text-accent mb-2">О нас</p>
+                        <h2 class="display-6 fw-bold mb-4">Небольшая обжарочная мастерская</h2>
+                        <p class="lead">Мы начинали с одной кофемолки и ростера на 1 кг. Сейчас обжариваем кофе для домашних любителей и маленьких кофеен по всей стране.</p>
+                        <p class="text-secondary mb-4">Каждую партию пробуем сами: проводим каппинг, записываем вкус и только потом отправляем в продажу. Поэтому на пачке всегда есть дата обжарки и описание вкуса.</p>
+                        <div class="row g-3 text-center">
+                            <div class="col-4">
+                                <div class="p-3 bg-white rounded-4 shadow-sm h-100">
+                                    <div class="stat-number">2019</div>
+                                    <div class="small text-secondary">год открытия</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 bg-white rounded-4 shadow-sm h-100">
+                                    <div class="stat-number">12</div>
+                                    <div class="small text-secondary">стран происхождения</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3 bg-white rounded-4 shadow-sm h-100">
+                                    <div class="stat-number">48 ч</div>
+                                    <div class="small text-secondary">от обжарки до отправки</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section class="py-5 bg-white" id="gallery">
+            <div class="container py-lg-4">
+                <div class="text-center mb-5 reveal">
+                    <p class="text-uppercase fw-semibold text-accent mb-2">Атмосфера</p>
+                    <h2 class="display-6 fw-bold">Немного кофейных кадров</h2>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6 col-md-4 reveal">
+                        <div class="gallery-item"><img src="images/gallery-1.jpg" class="img-fluid" alt="Капучино с рисунком в виде сердца" loading="lazy"></div>
+                    </div>
+                    <div class="col-6 col-md-4 reveal">
+                        <div class="gallery-item"><img src="images/gallery-2.jpg" class="img-fluid" alt="Две гейзерные кофеварки на полке" loading="lazy"></div>
+                    </div>
+                    <div class="col-6 col-md-4 reveal">
+                        <div class="gallery-item"><img src="images/gallery-3.jpg" class="img-fluid" alt="Спелые кофейные ягоды в ладонях" loading="lazy"></div>
+                    </div>
+                    <div class="col-6 col-md-4 reveal">
+                        <div class="gallery-item"><img src="images/gallery-4.jpg" class="img-fluid" alt="Воронка для заваривания у окна" loading="lazy"></div>
+                    </div>
+                    <div class="col-6 col-md-4 reveal">
+                        <div class="gallery-item"><img src="images/gallery-5.jpg" class="img-fluid" alt="Мешки с зерном рядом с ростером" loading="lazy"></div>
+                    </div>
+                    <div class="col-6 col-md-4 reveal">
+                        <div class="gallery-item"><img src="images/gallery-6.jpg" class="img-fluid" alt="Бариста рисует на молочной пене" loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Баннер с параллаксом и кнопкой, которая открывает модальное окно -->
+        <section class="promo-banner text-white text-center">
+            <div class="container">
+                <span class="badge text-bg-warning mb-3">Выгода 10%</span>
+                <h2 class="display-5 fw-bold mb-3">Кофе по подписке</h2>
+                <p class="lead mb-4 mx-auto promo-text">Каждые две недели — свежая пачка у вашей двери. Можно поменять сорт или поставить подписку на паузу в любой момент.</p>
+                <button type="button" class="btn btn-accent btn-lg" data-bs-toggle="modal" data-bs-target="#subscribeModal">Оформить подписку</button>
+            </div>
+        </section>
+
+        <!-- Частые вопросы (accordion) -->
+        <section class="py-5" id="faq">
+            <div class="container py-lg-4">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <div class="text-center mb-4 reveal">
+                            <p class="text-uppercase fw-semibold text-accent mb-2">FAQ</p>
+                            <h2 class="display-6 fw-bold">Частые вопросы</h2>
+                        </div>
+                        <div class="accordion reveal" id="faqAccordion">
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">Когда обжаривается кофе?</button>
+                                </h3>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">Каждый четверг. Заказы, оформленные до среды, отправляем свежей обжаркой этой недели. Дата обжарки всегда указана на пачке.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">Можно ли смолоть кофе?</button>
+                                </h3>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">Да, при заказе выберите помол: для турки, эспрессо, фильтра или френч-пресса. Но молотый кофе быстрее теряет аромат, поэтому лучше молоть прямо перед завариванием.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">Как быстро придёт заказ?</button>
+                                </h3>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">По Москве — на следующий день курьером. В другие города отправляем через пункты выдачи, доставка занимает 2–5 дней.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h3 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">Как хранить кофе?</button>
+                                </h3>
+                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">В закрытой пачке с клапаном, в тёмном прохладном месте, но не в холодильнике. Лучше всего выпить кофе в течение месяца после обжарки.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer-coffee pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-md-6 col-lg-5">
+                    <a class="navbar-brand d-flex align-items-center gap-2 text-white fs-4 mb-3" href="index.html">
+                        <img src="images/logo.svg" alt="" width="32" height="32">
+                        Зерно
+                    </a>
+                    <p class="mb-0">Свежеобжаренный кофе и всё для заваривания. Обжариваем каждый четверг и отправляем по всей России.</p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <h3 class="h6 text-white text-uppercase mb-3">Магазин</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="catalog.html">Каталог</a></li>
+                        <li class="mb-2"><a href="order.html">Оформить заказ</a></li>
+                        <li class="mb-2"><a href="index.html#faq">Частые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-4">
+                    <h3 class="h6 text-white text-uppercase mb-3">Контакты</h3>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">г. Москва, ул. Примерная, д. 1</li>
+                        <li class="mb-2"><a href="tel:+79000000000">+7 (900) 000-00-00</a></li>
+                        <li class="mb-2"><a href="mailto:hello@example.com">hello@example.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <p class="small mb-0 text-center">© 2026 Зерно. Учебный проект.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно: подписка на кофе -->
+    <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="subscribeModalLabel">Подписка на кофе</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" novalidate>
+                        <div class="alert alert-success d-none form-success" role="alert">Готово! Мы напишем вам на почту, чтобы подтвердить подписку.</div>
+                        <div class="mb-3">
+                            <label for="subName" class="form-label">Имя</label>
+                            <input type="text" class="form-control" id="subName" name="name" placeholder="Иван" required>
+                            <div class="invalid-feedback">Введите имя</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subEmail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="subEmail" name="email" placeholder="example@mail.ru" required>
+                            <div class="invalid-feedback">Введите корректный e-mail</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subCoffee" class="form-label">Какой кофе присылать</label>
+                            <select class="form-select" id="subCoffee" name="coffee" required>
+                                <option value="">Выберите сорт</option>
+                                <option value="ethiopia">Эфиопия Иргачеффе</option>
+                                <option value="colombia">Колумбия Супремо</option>
+                                <option value="brazil">Бразилия Сантос</option>
+                                <option value="mix">Каждый раз новый</option>
+                            </select>
+                            <div class="invalid-feedback">Выберите сорт</div>
+                        </div>
+                        <p class="form-label mb-2">Как часто</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="period" id="period2" value="2weeks" checked>
+                            <label class="form-check-label" for="period2">Раз в две недели</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="period" id="period4" value="month">
+                            <label class="form-check-label" for="period4">Раз в месяц</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="subAgree" name="agree" required>
+                            <label class="form-check-label" for="subAgree">Согласен на обработку персональных данных</label>
+                            <div class="invalid-feedback">Нужно согласие</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Подписаться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление «добавлено в корзину» (toast) -->
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+        <div id="cartToast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <span id="toastText">Товар добавлен в корзину</span>
+                    <a href="order.html" id="toastLink" class="link-warning ms-2">Оформить</a>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка «Наверх» -->
+    <a href="#" class="btn btn-primary rounded-circle shadow to-top" aria-label="Наверх">↑</a>
+
+    <!-- Bootstrap JS (нужен для меню, карусели, модального окна, аккордеона) -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

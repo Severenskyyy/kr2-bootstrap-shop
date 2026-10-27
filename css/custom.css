@@ -1,0 +1,564 @@
+/* =========================================
+   Зерно — собственные стили поверх Bootstrap
+   Контрольная работа №2. CSS-фреймворки
+   ========================================= */
+
+
+/* ---------- Переменные ---------- */
+:root {
+    --main-color: #6f4e37;       /* кофейный коричневый */
+    --main-dark: #4b3324;
+    --accent-color: #d4a373;     /* карамель */
+    --accent-dark: #a8652f;
+    --cream-color: #fbf6ef;      /* фон страницы */
+    --espresso-color: #2b1d14;   /* почти чёрный, для навбара и подвала */
+
+    /* цвет обычных ссылок Bootstrap делаем кофейным */
+    --bs-link-color: #6f4e37;
+    --bs-link-color-rgb: 111, 78, 55;
+    --bs-link-hover-color: #4b3324;
+    --bs-link-hover-color-rgb: 75, 51, 36;
+}
+
+
+/* ---------- Общие стили ---------- */
+body {
+    background-color: var(--cream-color);
+}
+
+h1, h2, h3,
+.navbar-brand {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* чтобы при переходе по якорю заголовок не прятался под навбаром */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+.text-accent {
+    color: var(--accent-dark);
+}
+
+.text-coffee {
+    color: var(--main-color);
+}
+
+.link-coffee {
+    color: var(--main-color);
+}
+
+
+/* ---------- Кнопки ---------- */
+/* меняем цвет btn-primary через переменные Bootstrap */
+.btn-primary {
+    --bs-btn-bg: var(--main-color);
+    --bs-btn-border-color: var(--main-color);
+    --bs-btn-hover-bg: var(--main-dark);
+    --bs-btn-hover-border-color: var(--main-dark);
+    --bs-btn-active-bg: var(--main-dark);
+    --bs-btn-active-border-color: var(--main-dark);
+    --bs-btn-disabled-bg: var(--main-color);
+    --bs-btn-disabled-border-color: var(--main-color);
+}
+
+/* своя кнопка карамельного цвета — такой в Bootstrap нет */
+.btn-accent {
+    --bs-btn-color: var(--espresso-color);
+    --bs-btn-bg: var(--accent-color);
+    --bs-btn-border-color: var(--accent-color);
+    --bs-btn-hover-color: var(--espresso-color);
+    --bs-btn-hover-bg: #c58f5a;
+    --bs-btn-hover-border-color: #c58f5a;
+    --bs-btn-active-color: var(--espresso-color);
+    --bs-btn-active-bg: #b97f48;
+    --bs-btn-active-border-color: #b97f48;
+    font-weight: 600;
+}
+
+/* кнопки немного «приподнимаются» при наведении */
+.btn-primary,
+.btn-accent {
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover,
+.btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(43, 29, 20, 0.2);
+}
+
+
+/* ---------- Навбар ---------- */
+.navbar-coffee {
+    background-color: var(--espresso-color);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.navbar-coffee .nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* активный пункт в выпадающем меню — кофейный, а не синий */
+.dropdown-menu {
+    --bs-dropdown-link-active-bg: var(--main-color);
+}
+
+.promo-alert {
+    font-size: 0.95rem;
+}
+
+
+/* ---------- Hero-карусель ---------- */
+.hero-slide {
+    height: 80vh;
+    min-height: 480px;
+    object-fit: cover;
+}
+
+/* тёмный слой поверх фото, чтобы текст читался */
+.hero-carousel .carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(20, 12, 6, 0.35), rgba(20, 12, 6, 0.65));
+}
+
+/* подпись слайда по центру по высоте */
+.hero-caption {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+}
+
+.hero-caption .display-4 {
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero-caption .lead {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* медленное приближение фото на активном слайде */
+.carousel-item.active .hero-slide {
+    animation: zoomOut 8s ease-out both;
+}
+
+/* текст слайда появляется по очереди */
+.carousel-item.active .hero-caption > * {
+    animation: fadeUp 0.9s ease both;
+}
+
+.carousel-item.active .hero-caption > *:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.carousel-item.active .hero-caption > *:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.carousel-item.active .hero-caption > *:nth-child(n+4) {
+    animation-delay: 0.45s;
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1.12);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------- Бегущая строка ---------- */
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 12px 0;
+    background-color: var(--accent-color);
+    color: var(--espresso-color);
+    font-weight: 600;
+}
+
+.ticker-line {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+}
+
+.ticker-line span {
+    margin: 0 18px;
+}
+
+/* если навести мышку — строка останавливается */
+.ticker:hover .ticker-line {
+    animation-play-state: paused;
+}
+
+@keyframes ticker {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* ---------- Карточки преимуществ и контактов ---------- */
+.feature-card {
+    border-radius: 1rem;
+    background-color: #ffffff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 1rem 2rem rgba(43, 29, 20, 0.12);
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    background-color: #f3e6d8;
+    color: var(--main-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.feature-card:hover .feature-icon {
+    background-color: var(--main-color);
+    color: #ffffff;
+}
+
+
+/* ---------- Карточки товаров ---------- */
+.product-card {
+    border: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0.25rem 1rem rgba(43, 29, 20, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1.25rem 2.5rem rgba(43, 29, 20, 0.18);
+}
+
+.product-img {
+    overflow: hidden;
+}
+
+.product-img img {
+    height: 230px;
+    object-fit: cover;
+    transition: transform 0.6s;
+}
+
+/* фото в карточке приближается при наведении */
+.product-card:hover .product-img img {
+    transform: scale(1.08);
+}
+
+/* «пульсирующий» бейдж, чтобы привлечь внимание */
+.badge-pulse {
+    animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.12);
+    }
+}
+
+
+/* ---------- «От зерна до чашки»: текст едет по фоновой картинке ---------- */
+.story-intro {
+    max-width: 560px;
+}
+
+.story-step {
+    height: 170vh;                 /* высокий блок, чтобы тексту было куда ехать */
+    padding: 15vh 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;  /* картинка стоит на месте, а страница едет */
+}
+
+.story-farm {
+    background-image: linear-gradient(rgba(20, 12, 6, 0.3), rgba(20, 12, 6, 0.3)), url("../images/story-farm.jpg");
+}
+
+.story-roast {
+    background-image: linear-gradient(rgba(20, 12, 6, 0.4), rgba(20, 12, 6, 0.4)), url("../images/story-roast.jpg");
+}
+
+.story-brew {
+    background-image: linear-gradient(rgba(20, 12, 6, 0.4), rgba(20, 12, 6, 0.4)), url("../images/story-brew.jpg");
+}
+
+.story-card {
+    position: sticky;              /* прилипает к экрану... */
+    top: 110px;                    /* ...на 110px от верха, под навбаром */
+    padding: 2.5rem;
+    border-radius: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
+}
+
+.story-number {
+    margin-bottom: 0.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--accent-color);
+}
+
+
+/* ---------- О нас ---------- */
+.stat-number {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--main-color);
+}
+
+
+/* ---------- Галерея ---------- */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 0.6s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+
+/* ---------- Баннер «Кофе по подписке» (параллакс) ---------- */
+.promo-banner {
+    padding: 140px 0;
+    background-image: linear-gradient(rgba(43, 29, 20, 0.75), rgba(43, 29, 20, 0.55)), url("../images/promo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.promo-text {
+    max-width: 620px;
+}
+
+
+/* ---------- Аккордеон и вкладки в цветах сайта ---------- */
+.accordion {
+    --bs-accordion-active-bg: #f3e6d8;
+    --bs-accordion-active-color: var(--espresso-color);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(111, 78, 55, 0.25);
+    --bs-accordion-btn-active-icon: var(--bs-accordion-btn-icon);
+}
+
+
+/* ---------- Формы: фокус и отметки в цветах сайта ---------- */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(212, 163, 115, 0.35);
+}
+
+.form-check-input:checked {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.form-check-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(212, 163, 115, 0.35);
+}
+
+
+/* ---------- Шапка внутренних страниц ---------- */
+.page-header {
+    padding: 110px 0 70px;
+    color: #ffffff;
+    background-size: cover;
+    background-position: center;
+}
+
+.page-header-catalog {
+    background-image: linear-gradient(rgba(43, 29, 20, 0.65), rgba(43, 29, 20, 0.65)), url("../images/header-catalog.jpg");
+}
+
+.page-header-order {
+    background-image: linear-gradient(rgba(43, 29, 20, 0.6), rgba(43, 29, 20, 0.6)), url("../images/header-order.jpg");
+}
+
+.page-header-contacts {
+    background-image: linear-gradient(rgba(43, 29, 20, 0.6), rgba(43, 29, 20, 0.6)), url("../images/header-contacts.jpg");
+}
+
+.page-header .breadcrumb {
+    --bs-breadcrumb-divider-color: rgba(255, 255, 255, 0.6);
+    --bs-breadcrumb-item-active-color: #ffffff;
+}
+
+.page-header .breadcrumb a {
+    color: var(--accent-color);
+}
+
+
+/* ---------- Каталог ---------- */
+.help-box {
+    background: linear-gradient(135deg, var(--main-color), var(--espresso-color));
+}
+
+
+/* ---------- Страница товара и заказа ---------- */
+/* sticky-lg-top из Bootstrap прилипает к самому верху — опускаем ниже навбара.
+   Только для больших экранов: на телефоне карточка не прилипает,
+   и top сдвинул бы её вниз (у .card стоит position: relative) */
+@media (min-width: 992px) {
+    .product-info,
+    .order-summary {
+        top: 100px;
+        z-index: 1;    /* чтобы выпадающее меню навбара было поверх карточки */
+    }
+}
+
+.summary-img {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+
+/* ---------- Подвал ---------- */
+.footer-coffee {
+    background-color: var(--espresso-color);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-coffee a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+
+.footer-coffee a:hover {
+    color: var(--accent-color);
+}
+
+
+/* ---------- Кнопка «Наверх» ---------- */
+.to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1030;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+}
+
+
+/* ---------- Появление блоков при прокрутке (класс show ставит main.js) ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ---------- Адаптивность ---------- */
+/* планшеты и телефоны */
+@media (max-width: 991.98px) {
+    /* на телефонах фиксированный фон работает плохо, поэтому отключаем */
+    .story-step,
+    .promo-banner {
+        background-attachment: scroll;
+    }
+
+    .story-step {
+        height: 140vh;
+    }
+
+    .hero-slide {
+        height: 70vh;
+    }
+}
+
+/* телефоны */
+@media (max-width: 575.98px) {
+    .hero-caption {
+        left: 8%;
+        right: 8%;
+    }
+
+    .hero-caption .display-4 {
+        font-size: 2rem;
+    }
+
+    .hero-caption .lead {
+        font-size: 1rem;
+    }
+
+    /* стрелки карусели мешают кнопкам, на телефоне листаем свайпом */
+    .hero-carousel .carousel-control-prev,
+    .hero-carousel .carousel-control-next {
+        display: none;
+    }
+
+    .story-card {
+        padding: 1.5rem;
+    }
+
+    .story-number {
+        font-size: 3rem;
+    }
+
+    .page-header {
+        padding: 80px 0 50px;
+    }
+
+    .promo-banner {
+        padding: 90px 0;
+    }
+}
