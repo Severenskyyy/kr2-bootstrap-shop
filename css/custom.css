@@ -1,0 +1,475 @@
+/* ==========================================================================
+   SVR — собственные стили поверх Bootstrap 5.3 (КР №2)
+   Подключается ПОСЛЕ bootstrap.min.css, поэтому может переопределять его.
+   Bootstrap здесь не дублируется: меняем его CSS-переменные (тема, цвета,
+   шрифты, скругления) и добавляем только то, чего в Bootstrap нет.
+   ========================================================================== */
+
+/* ---------- Шрифты бренда (локальные) ---------- */
+@font-face {
+  font-family: "Unbounded";
+  src: url("../fonts/unbounded-cyrillic.woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Unbounded";
+  src: url("../fonts/unbounded-latin.woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Unbounded";
+  src: url("../fonts/unbounded-rub.woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+  unicode-range: U+20BD;
+}
+@font-face {
+  font-family: "Onest";
+  src: url("../fonts/onest-cyrillic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Onest";
+  src: url("../fonts/onest-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Onest";
+  src: url("../fonts/onest-rub.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+20BD;
+}
+
+/* ---------- Тема: переопределяем переменные Bootstrap ---------- */
+:root,
+[data-bs-theme="light"] {
+  --bs-primary: #5532f0;
+  --bs-primary-rgb: 85, 50, 240;
+  --bs-primary-text-emphasis: #2a1878;
+  --bs-primary-bg-subtle: #ece8ff;
+  --bs-primary-border-subtle: #c9bfff;
+  --bs-link-color: #5532f0;
+  --bs-link-color-rgb: 85, 50, 240;
+  --bs-link-hover-color: #4220d0;
+  --bs-link-hover-color-rgb: 66, 32, 208;
+  --bs-body-font-family: "Onest", "Segoe UI", Arial, sans-serif;
+  --bs-body-color: #1b1f27;
+  --bs-body-color-rgb: 27, 31, 39;
+  --bs-body-bg: #eef0f4;
+  --bs-body-bg-rgb: 238, 240, 244;
+  --bs-secondary-color: rgba(27, 31, 39, 0.72);
+  --bs-tertiary-bg: #ffffff;
+  --bs-border-color: #d8dce4;
+  --bs-border-radius: 0.5rem;
+  --bs-border-radius-lg: 0.75rem;
+  --bs-border-radius-xl: 1.25rem;
+  --bs-focus-ring-color: rgba(85, 50, 240, 0.35);
+
+  /* свои переменные бренда */
+  --svr-stage: #13161d;
+  --svr-argb: linear-gradient(90deg, #ff3d6e 0%, #ffb02e 25%, #2bd9a0 50%, #22b8ff 75%, #7b5cff 100%);
+  --svr-font-display: "Unbounded", "Arial Black", sans-serif;
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #13161d;
+  --bs-body-bg-rgb: 19, 22, 29;
+  --bs-secondary-color: rgba(243, 244, 247, 0.72);
+}
+
+/* картинки не шире контейнера и сохраняют пропорции
+   (в Bootstrap height: auto есть только у .img-fluid) */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* заголовки — фирменным шрифтом */
+h1, h2, h3, .h1, .h2, .h3, .h4, .h5, .display-5, .display-6 {
+  font-family: var(--svr-font-display);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Кнопки: меняем только переменные компонента btn ---------- */
+.btn-primary {
+  --bs-btn-bg: #5532f0;
+  --bs-btn-border-color: #5532f0;
+  --bs-btn-hover-bg: #4220d0;
+  --bs-btn-hover-border-color: #4220d0;
+  --bs-btn-active-bg: #3a1bbd;
+  --bs-btn-active-border-color: #3a1bbd;
+  --bs-btn-disabled-bg: #5532f0;
+  --bs-btn-disabled-border-color: #5532f0;
+  --bs-btn-focus-shadow-rgb: 85, 50, 240;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #5532f0;
+  --bs-btn-border-color: #5532f0;
+  --bs-btn-hover-bg: #5532f0;
+  --bs-btn-hover-border-color: #5532f0;
+  --bs-btn-active-bg: #4220d0;
+  --bs-btn-active-border-color: #4220d0;
+  --bs-btn-focus-shadow-rgb: 85, 50, 240;
+}
+
+.btn {
+  font-weight: 600;
+}
+
+/* дополнительное состояние: видимая рамка фокуса с клавиатуры */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.form-check-input:focus-visible {
+  outline: 3px solid #5532f0;
+  outline-offset: 2px;
+}
+
+/* ---------- Логотип и шапка ---------- */
+.svr-logo {
+  position: relative;
+  padding-bottom: 6px;
+  font-family: var(--svr-font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: #1b1f27;
+}
+
+.svr-logo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0.06em;
+  bottom: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--svr-argb);
+}
+
+.svr-logo--light {
+  color: #ffffff;
+}
+
+/* ARGB-полоска под navbar — фирменный элемент */
+.svr-navbar {
+  --bs-navbar-active-color: #5532f0;
+  --bs-navbar-hover-color: #5532f0;
+}
+
+.svr-navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--svr-argb);
+}
+
+.svr-navbar .nav-link {
+  font-weight: 500;
+}
+
+/* ---------- Hero ---------- */
+.svr-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(520px 420px at 80% 55%, rgba(255, 61, 110, 0.22), transparent 70%),
+    var(--svr-stage);
+  color: #f3f4f7;
+}
+
+.svr-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--svr-argb);
+}
+
+.svr-hero__img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.svr-plate {
+  margin-left: -48px;
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(19, 22, 29, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.svr-price {
+  font-family: var(--svr-font-display);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Карточки ---------- */
+.svr-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* при наведении сверху загорается ARGB-полоска */
+.svr-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 3px;
+  background: var(--svr-argb);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.svr-card:hover {
+  transform: translateY(-3px);
+  border-color: #b9bfcb;
+}
+
+.svr-card:hover::before {
+  opacity: 1;
+}
+
+.svr-card:focus-within {
+  border-color: #5532f0;
+}
+
+.svr-card__img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* категории на главной: фото + затемнение снизу */
+.svr-cat {
+  overflow: hidden;
+  border: 0;
+  background-color: var(--svr-stage);
+}
+
+.svr-cat__img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.svr-cat .card-img-overlay {
+  background: linear-gradient(to top, rgba(19, 22, 29, 0.88), rgba(19, 22, 29, 0) 60%);
+}
+
+.svr-cat .h5 {
+  font-family: var(--svr-font-display);
+}
+
+.svr-cat:hover .svr-cat__img {
+  transform: scale(1.05);
+}
+
+.svr-cat:focus-visible {
+  outline: 3px solid #5532f0;
+  outline-offset: 3px;
+}
+
+/* преимущества: у каждого пункта свой «канал» подсветки */
+.svr-feature {
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid #ff3d6e;
+}
+
+.col:nth-child(2) > .svr-feature {
+  border-left-color: #ffb02e;
+}
+
+.col:nth-child(3) > .svr-feature {
+  border-left-color: #2bd9a0;
+}
+
+.col:nth-child(4) > .svr-feature {
+  border-left-color: #22b8ff;
+}
+
+.svr-panel {
+  border-radius: var(--bs-border-radius-xl);
+}
+
+/* ---------- Каталог ---------- */
+.svr-pills {
+  --bs-nav-pills-link-active-bg: #5532f0;
+  gap: 0.25rem;
+  scrollbar-width: thin;
+}
+
+.svr-pills .nav-link {
+  white-space: nowrap;
+  color: #1b1f27;
+}
+
+.svr-pills .nav-link:not(.active):hover {
+  background-color: #ece8ff;
+}
+
+.svr-pills .nav-link.active .badge {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+@media (min-width: 992px) {
+  .svr-filter {
+    position: sticky;
+    top: 90px;
+  }
+}
+
+/* ---------- Страница товара ---------- */
+.svr-gallery__img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* индикаторы карусели превращены в миниатюры под фото */
+.svr-thumbs {
+  position: static;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  margin: 0.75rem 0 0;
+}
+
+.svr-thumbs [data-bs-target] {
+  flex: 0 0 auto;
+  width: 76px;
+  height: 76px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  text-indent: 0;
+  border: 2px solid transparent;
+  border-radius: var(--bs-border-radius);
+  background: none;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.svr-thumbs [data-bs-target]:hover {
+  opacity: 1;
+}
+
+.svr-thumbs .active {
+  border-color: #5532f0;
+  opacity: 1;
+}
+
+.svr-thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.svr-gallery .carousel-caption p {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background-color: rgba(19, 22, 29, 0.75);
+}
+
+/* прогресс-бары FPS окрашены в ARGB-градиент */
+.svr-progress {
+  height: 10px;
+  background-color: #e3e6ec;
+}
+
+.svr-progress .progress-bar {
+  background: var(--svr-argb);
+}
+
+.svr-compare th,
+.svr-compare td {
+  min-width: 150px;
+}
+
+/* ---------- Форма заявки ---------- */
+/* рамки полей и чекбоксов темнее стандартных: контраст не ниже 3:1 */
+.form-control,
+.form-select,
+.form-check-input,
+.input-group-text {
+  border-color: #858c9b;
+}
+
+/* Подсветка ошибок без JavaScript: :user-invalid срабатывает только
+   после ввода или попытки отправить форму */
+.form-control:user-invalid,
+.form-select:user-invalid {
+  border-color: var(--bs-form-invalid-border-color);
+}
+
+.form-control:user-valid,
+.form-select:user-valid {
+  border-color: var(--bs-form-valid-border-color);
+}
+
+.form-control:user-invalid ~ .invalid-feedback,
+.form-select:user-invalid ~ .invalid-feedback,
+.input-group:has(:user-invalid) ~ .invalid-feedback {
+  display: block;
+}
+
+/* «Заявка отправлена» видна, только когда в адресе #order-sent */
+.svr-sent {
+  display: none !important;
+}
+
+.svr-sent:target {
+  display: flex !important;
+}
+
+/* ---------- Подвал ---------- */
+.svr-footer {
+  position: relative;
+}
+
+.svr-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--svr-argb);
+}
+
+/* ---------- Адаптивность: уточнения ---------- */
+@media (max-width: 575.98px) {
+  .svr-plate {
+    margin-left: 0;
+  }
+
+  .svr-thumbs [data-bs-target] {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svr-card,
+  .svr-cat__img {
+    transition: none;
+  }
+}

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Каталог — SVR | Bootstrap-версия</title>
+  <meta name="description" content="Каталог SVR на Bootstrap: ноутбуки, сборки игровых ПК, наушники и периферия с фильтром по категориям.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <!-- Bootstrap подключён локально (без CDN): файлы лежат в vendor/ -->
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css?v=2">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css?v=2">
+  <!-- Свои стили подключаются ПОСЛЕ Bootstrap, чтобы переопределять его -->
+  <link rel="stylesheet" href="css/custom.css?v=2">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Компонент navbar: на экранах < lg меню сворачивается в кнопку (collapse из Bootstrap JS) -->
+  <nav class="navbar navbar-expand-lg bg-body sticky-top svr-navbar" aria-label="Основное меню">
+    <div class="container">
+      <a class="navbar-brand svr-logo" href="index.html">SVR</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-3 mb-lg-0 gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="catalog.html">Каталог</a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html">SVR Gamer</a></li>
+          <li class="nav-item"><a class="nav-link" href="order.html">Оформить заявку</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contacts">Контакты</a></li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 gap-lg-3 pb-3 pb-lg-0">
+          <a class="link-body-emphasis text-decoration-none fw-semibold" href="tel:+74951234567"><i class="bi bi-telephone text-primary me-1" aria-hidden="true"></i>+7 (495) 123-45-67</a>
+          <a class="btn btn-primary" href="order.html">Оставить заявку</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1">
+    <div class="container">
+      <nav aria-label="Хлебные крошки" class="pt-4">
+        <ol class="breadcrumb small mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Каталог</li>
+        </ol>
+      </nav>
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 py-3">
+        <div>
+          <h1 class="h2 mb-1">Каталог</h1>
+          <p class="text-body-secondary mb-0">Сборки SVR, ноутбуки, наушники и периферия — всё в наличии в шоуруме.</p>
+        </div>
+        <!-- Кнопка видна только на экранах < lg: открывает фильтры в offcanvas -->
+        <button class="btn btn-outline-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filters" aria-controls="filters">
+          <i class="bi bi-funnel me-1" aria-hidden="true"></i>Фильтры
+        </button>
+      </div>
+
+      <div class="row g-4 pb-5">
+        <!-- offcanvas-lg: на десктопе это обычная колонка, на телефоне — выезжающая панель -->
+        <aside class="col-lg-3">
+          <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="filters">
+            <div class="offcanvas-header">
+              <h2 class="offcanvas-title h5" id="filtersLabel">Фильтры</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#filters" aria-label="Закрыть"></button>
+            </div>
+            <div class="offcanvas-body">
+              <form class="card svr-filter w-100" action="catalog.html" method="get">
+                <div class="card-body d-grid gap-4">
+                  <h2 class="h5 mb-0 d-none d-lg-block">Фильтры</h2>
+                  <fieldset>
+                    <legend class="fs-6 fw-bold">Цена</legend>
+                    <div class="input-group input-group-sm mb-2">
+                      <span class="input-group-text">от</span>
+                      <input type="number" class="form-control" name="price_from" min="0" step="1000" placeholder="4990" aria-label="Цена от">
+                      <span class="input-group-text">₽</span>
+                    </div>
+                    <div class="input-group input-group-sm">
+                      <span class="input-group-text">до</span>
+                      <input type="number" class="form-control" name="price_to" min="0" step="1000" placeholder="219990" aria-label="Цена до">
+                      <span class="input-group-text">₽</span>
+                    </div>
+                  </fieldset>
+                  <fieldset>
+                    <legend class="fs-6 fw-bold">Бренд</legend>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="svr" id="brand-svr" name="brand">
+                  <label class="form-check-label" for="brand-svr">SVR</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="asus" id="brand-asus" name="brand">
+                  <label class="form-check-label" for="brand-asus">ASUS</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="apple" id="brand-apple" name="brand">
+                  <label class="form-check-label" for="brand-apple">Apple</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="dell" id="brand-dell" name="brand">
+                  <label class="form-check-label" for="brand-dell">Dell</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="sony" id="brand-sony" name="brand">
+                  <label class="form-check-label" for="brand-sony">Sony</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="hyperx" id="brand-hyperx" name="brand">
+                  <label class="form-check-label" for="brand-hyperx">HyperX</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="logitech" id="brand-logitech" name="brand">
+                  <label class="form-check-label" for="brand-logitech">Logitech</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="keychron" id="brand-keychron" name="brand">
+                  <label class="form-check-label" for="brand-keychron">Keychron</label>
+                </div>
+                  </fieldset>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="in-stock" name="in_stock" checked>
+                    <label class="form-check-label" for="in-stock">Только в наличии</label>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-primary btn-sm flex-grow-1" type="submit">Показать</button>
+                    <button class="btn btn-outline-secondary btn-sm" type="reset">Сбросить</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </aside>
+
+        <section class="col-lg-9" aria-labelledby="catalog-list-title">
+          <h2 class="visually-hidden" id="catalog-list-title">Товары</h2>
+          <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+            <!-- Категории переключаются компонентом Tabs (nav-pills) без собственного JavaScript -->
+            <ul class="nav nav-pills svr-pills flex-nowrap overflow-x-auto pb-1" id="catalogTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="tab-all" data-bs-toggle="pill" data-bs-target="#pane-all" type="button" role="tab" aria-controls="pane-all" aria-selected="true">Все товары <span class="badge text-bg-light ms-1">12</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-laptops" data-bs-toggle="pill" data-bs-target="#pane-laptops" type="button" role="tab" aria-controls="pane-laptops" aria-selected="false">Ноутбуки <span class="badge text-bg-light ms-1">3</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-builds" data-bs-toggle="pill" data-bs-target="#pane-builds" type="button" role="tab" aria-controls="pane-builds" aria-selected="false">Игровые ПК <span class="badge text-bg-light ms-1">3</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-audio" data-bs-toggle="pill" data-bs-target="#pane-audio" type="button" role="tab" aria-controls="pane-audio" aria-selected="false">Наушники <span class="badge text-bg-light ms-1">3</span></button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-gear" data-bs-toggle="pill" data-bs-target="#pane-gear" type="button" role="tab" aria-controls="pane-gear" aria-selected="false">Периферия <span class="badge text-bg-light ms-1">3</span></button>
+            </li>
+            </ul>
+            <div class="flex-shrink-0">
+              <label class="visually-hidden" for="sort">Сортировка</label>
+              <select class="form-select" id="sort" name="sort">
+                <option value="popular">Сначала популярные</option>
+                <option value="cheap">Сначала дешевле</option>
+                <option value="expensive">Сначала дороже</option>
+              </select>
+            </div>
+          </div>
+          <div class="tab-content">
+          <div class="tab-pane fade show active" id="pane-all" role="tabpanel" aria-labelledby="tab-all" tabindex="0">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-svr-gamer.jpg" width="800" height="600" alt="Игровой ПК SVR Gamer в корпусе со стеклянными панелями, вентиляторы светятся красным" loading="lazy">
+                    <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-0 m-3">Хит</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровой ПК</p>
+                    <h3 class="card-title h6 fw-bold">SVR Gamer</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Intel Core i7-9700K</li>
+                      <li>MSI GeForce RTX 2070 SUPER</li>
+                      <li>32&nbsp;ГБ DDR4, SSD 1&nbsp;ТБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">119&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про SVR Gamer</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-rog-strix-g15.jpg" width="800" height="600" alt="Игровой ноутбук ASUS ROG Strix G15 серого цвета с красной вставкой у петли" loading="lazy">
+                    <span class="badge rounded-pill text-bg-warning position-absolute top-0 start-0 m-3">−17&nbsp;%</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровой ноутбук</p>
+                    <h3 class="card-title h6 fw-bold">ASUS ROG Strix G15 G513QY</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>15,6″, 2560×1440, 165&nbsp;Гц</li>
+                      <li>AMD Ryzen 9 5900HX</li>
+                      <li>Radeon RX 6800M, 12&nbsp;ГБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column text-danger">99&nbsp;990&nbsp;₽ <s class="small text-body-secondary fw-normal">119&nbsp;990&nbsp;₽</s></p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про ASUS ROG Strix G15 G513QY</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-sony-wh-1000xm4.jpg" width="800" height="600" alt="Чёрные полноразмерные наушники Sony WH-1000XM4 на бежевом фоне" loading="lazy">
+                    <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-0 m-3">Хит</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Беспроводные наушники</p>
+                    <h3 class="card-title h6 fw-bold">Sony WH-1000XM4</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Активное шумоподавление</li>
+                      <li>До 30&nbsp;часов работы</li>
+                      <li>Bluetooth 5.0, LDAC</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">24&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Sony WH-1000XM4</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-keychron-k2.jpg" width="800" height="600" alt="Механическая клавиатура Keychron K2 с оранжевой клавишей Esc на мраморной поверхности" loading="lazy">
+                    <span class="badge rounded-pill text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Механическая клавиатура</p>
+                    <h3 class="card-title h6 fw-bold">Keychron K2</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Раскладка 75&nbsp;%, 84&nbsp;клавиши</li>
+                      <li>Bluetooth и USB-C</li>
+                      <li>Аккумулятор 4000&nbsp;мА·ч</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">8&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Keychron K2</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-macbook-air-m2.jpg" width="800" height="600" alt="Ноутбук Apple MacBook Air M2 цвета «тёмная ночь» с открытой крышкой" loading="lazy">
+                    <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-0 m-3">Хит</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Ноутбук</p>
+                    <h3 class="card-title h6 fw-bold">Apple MacBook Air 13 M2</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>13,6″ Liquid Retina, 2560×1664</li>
+                      <li>Apple M2, 8&nbsp;ГБ</li>
+                      <li>SSD 256&nbsp;ГБ, вес 1,24&nbsp;кг</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">89&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Apple MacBook Air 13 M2</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-svr-start.jpg" width="800" height="600" alt="SVR Start изнутри: башенный кулер Cooler Master, память Corsair и видеокарта ASUS" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровой ПК</p>
+                    <h3 class="card-title h6 fw-bold">SVR Start</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Intel Core i5-9600K</li>
+                      <li>ASUS GeForce RTX 3060, 12&nbsp;ГБ</li>
+                      <li>16&nbsp;ГБ DDR4, SSD 1&nbsp;ТБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">64&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про SVR Start</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-hyperx-cloud.jpg" width="800" height="600" alt="Проводная игровая гарнитура HyperX Cloud серебристо-чёрного цвета со съёмным микрофоном" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровая гарнитура</p>
+                    <h3 class="card-title h6 fw-bold">HyperX Cloud Silver</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Драйверы 53&nbsp;мм</li>
+                      <li>Съёмный микрофон</li>
+                      <li>Разъём 3,5&nbsp;мм, ПК и консоли</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">6&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про HyperX Cloud Silver</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-logitech-g502.jpg" width="800" height="600" alt="Проводная игровая мышь Logitech G502 HERO с подсвеченным логотипом" loading="lazy">
+                    <span class="badge rounded-pill text-bg-warning position-absolute top-0 start-0 m-3">−15&nbsp;%</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровая мышь</p>
+                    <h3 class="card-title h6 fw-bold">Logitech G502 HERO</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Сенсор HERO 25K</li>
+                      <li>11 программируемых кнопок</li>
+                      <li>Грузы 5 × 3,6&nbsp;г</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column text-danger">5&nbsp;490&nbsp;₽ <s class="small text-body-secondary fw-normal">6&nbsp;490&nbsp;₽</s></p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Logitech G502 HERO</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-dell-xps-13.jpg" width="800" height="600" alt="Белый ультрабук Dell XPS 13 на подоконнике с видом на город" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Ультрабук</p>
+                    <h3 class="card-title h6 fw-bold">Dell XPS 13 9300</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>13,4″, 1920×1200</li>
+                      <li>Intel Core i7-1065G7</li>
+                      <li>16&nbsp;ГБ, SSD 512&nbsp;ГБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">74&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Dell XPS 13 9300</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-svr-studio.jpg" width="800" height="600" alt="SVR Studio изнутри: кулер AMD Ryzen Threadripper и видеокарта XFX Radeon RX 6700 XT в корпусе Lian Li" loading="lazy">
+                    <span class="badge rounded-pill text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Рабочая станция</p>
+                    <h3 class="card-title h6 fw-bold">SVR Studio</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>AMD Ryzen Threadripper 3960X</li>
+                      <li>XFX Radeon RX 6700 XT, 12&nbsp;ГБ</li>
+                      <li>64&nbsp;ГБ DDR4, SSD 2&nbsp;ТБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">219&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про SVR Studio</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-airpods-pro.jpg" width="800" height="600" alt="Открытый зарядный кейс с наушниками Apple AirPods Pro" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">TWS-наушники</p>
+                    <h3 class="card-title h6 fw-bold">Apple AirPods Pro</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Активное шумоподавление</li>
+                      <li>Режим прозрачности</li>
+                      <li>До 24&nbsp;часов с кейсом</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">16&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Apple AirPods Pro</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-dualshock-4.jpg" width="800" height="600" alt="Беспроводной геймпад Sony DualShock 4 чёрного цвета" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Геймпад</p>
+                    <h3 class="card-title h6 fw-bold">Sony DualShock 4</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Bluetooth, вибрация, гироскоп</li>
+                      <li>Сенсорная панель</li>
+                      <li>Для PS4 и ПК</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">4&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Sony DualShock 4</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pane-laptops" role="tabpanel" aria-labelledby="tab-laptops" tabindex="0">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-rog-strix-g15.jpg" width="800" height="600" alt="Игровой ноутбук ASUS ROG Strix G15 серого цвета с красной вставкой у петли" loading="lazy">
+                    <span class="badge rounded-pill text-bg-warning position-absolute top-0 start-0 m-3">−17&nbsp;%</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровой ноутбук</p>
+                    <h3 class="card-title h6 fw-bold">ASUS ROG Strix G15 G513QY</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>15,6″, 2560×1440, 165&nbsp;Гц</li>
+                      <li>AMD Ryzen 9 5900HX</li>
+                      <li>Radeon RX 6800M, 12&nbsp;ГБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column text-danger">99&nbsp;990&nbsp;₽ <s class="small text-body-secondary fw-normal">119&nbsp;990&nbsp;₽</s></p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про ASUS ROG Strix G15 G513QY</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-macbook-air-m2.jpg" width="800" height="600" alt="Ноутбук Apple MacBook Air M2 цвета «тёмная ночь» с открытой крышкой" loading="lazy">
+                    <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-0 m-3">Хит</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Ноутбук</p>
+                    <h3 class="card-title h6 fw-bold">Apple MacBook Air 13 M2</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>13,6″ Liquid Retina, 2560×1664</li>
+                      <li>Apple M2, 8&nbsp;ГБ</li>
+                      <li>SSD 256&nbsp;ГБ, вес 1,24&nbsp;кг</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">89&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Apple MacBook Air 13 M2</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-dell-xps-13.jpg" width="800" height="600" alt="Белый ультрабук Dell XPS 13 на подоконнике с видом на город" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Ультрабук</p>
+                    <h3 class="card-title h6 fw-bold">Dell XPS 13 9300</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>13,4″, 1920×1200</li>
+                      <li>Intel Core i7-1065G7</li>
+                      <li>16&nbsp;ГБ, SSD 512&nbsp;ГБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">74&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Dell XPS 13 9300</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pane-builds" role="tabpanel" aria-labelledby="tab-builds" tabindex="0">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-svr-gamer.jpg" width="800" height="600" alt="Игровой ПК SVR Gamer в корпусе со стеклянными панелями, вентиляторы светятся красным" loading="lazy">
+                    <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-0 m-3">Хит</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровой ПК</p>
+                    <h3 class="card-title h6 fw-bold">SVR Gamer</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Intel Core i7-9700K</li>
+                      <li>MSI GeForce RTX 2070 SUPER</li>
+                      <li>32&nbsp;ГБ DDR4, SSD 1&nbsp;ТБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">119&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про SVR Gamer</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-svr-start.jpg" width="800" height="600" alt="SVR Start изнутри: башенный кулер Cooler Master, память Corsair и видеокарта ASUS" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровой ПК</p>
+                    <h3 class="card-title h6 fw-bold">SVR Start</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Intel Core i5-9600K</li>
+                      <li>ASUS GeForce RTX 3060, 12&nbsp;ГБ</li>
+                      <li>16&nbsp;ГБ DDR4, SSD 1&nbsp;ТБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">64&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про SVR Start</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-svr-studio.jpg" width="800" height="600" alt="SVR Studio изнутри: кулер AMD Ryzen Threadripper и видеокарта XFX Radeon RX 6700 XT в корпусе Lian Li" loading="lazy">
+                    <span class="badge rounded-pill text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Рабочая станция</p>
+                    <h3 class="card-title h6 fw-bold">SVR Studio</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>AMD Ryzen Threadripper 3960X</li>
+                      <li>XFX Radeon RX 6700 XT, 12&nbsp;ГБ</li>
+                      <li>64&nbsp;ГБ DDR4, SSD 2&nbsp;ТБ</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">219&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про SVR Studio</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pane-audio" role="tabpanel" aria-labelledby="tab-audio" tabindex="0">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-sony-wh-1000xm4.jpg" width="800" height="600" alt="Чёрные полноразмерные наушники Sony WH-1000XM4 на бежевом фоне" loading="lazy">
+                    <span class="badge rounded-pill text-bg-danger position-absolute top-0 start-0 m-3">Хит</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Беспроводные наушники</p>
+                    <h3 class="card-title h6 fw-bold">Sony WH-1000XM4</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Активное шумоподавление</li>
+                      <li>До 30&nbsp;часов работы</li>
+                      <li>Bluetooth 5.0, LDAC</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">24&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Sony WH-1000XM4</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-hyperx-cloud.jpg" width="800" height="600" alt="Проводная игровая гарнитура HyperX Cloud серебристо-чёрного цвета со съёмным микрофоном" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровая гарнитура</p>
+                    <h3 class="card-title h6 fw-bold">HyperX Cloud Silver</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Драйверы 53&nbsp;мм</li>
+                      <li>Съёмный микрофон</li>
+                      <li>Разъём 3,5&nbsp;мм, ПК и консоли</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">6&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про HyperX Cloud Silver</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-airpods-pro.jpg" width="800" height="600" alt="Открытый зарядный кейс с наушниками Apple AirPods Pro" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">TWS-наушники</p>
+                    <h3 class="card-title h6 fw-bold">Apple AirPods Pro</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Активное шумоподавление</li>
+                      <li>Режим прозрачности</li>
+                      <li>До 24&nbsp;часов с кейсом</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">16&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Apple AirPods Pro</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pane-gear" role="tabpanel" aria-labelledby="tab-gear" tabindex="0">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-keychron-k2.jpg" width="800" height="600" alt="Механическая клавиатура Keychron K2 с оранжевой клавишей Esc на мраморной поверхности" loading="lazy">
+                    <span class="badge rounded-pill text-bg-success position-absolute top-0 start-0 m-3">Новинка</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Механическая клавиатура</p>
+                    <h3 class="card-title h6 fw-bold">Keychron K2</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Раскладка 75&nbsp;%, 84&nbsp;клавиши</li>
+                      <li>Bluetooth и USB-C</li>
+                      <li>Аккумулятор 4000&nbsp;мА·ч</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">8&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Keychron K2</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-logitech-g502.jpg" width="800" height="600" alt="Проводная игровая мышь Logitech G502 HERO с подсвеченным логотипом" loading="lazy">
+                    <span class="badge rounded-pill text-bg-warning position-absolute top-0 start-0 m-3">−15&nbsp;%</span>
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Игровая мышь</p>
+                    <h3 class="card-title h6 fw-bold">Logitech G502 HERO</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Сенсор HERO 25K</li>
+                      <li>11 программируемых кнопок</li>
+                      <li>Грузы 5 × 3,6&nbsp;г</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column text-danger">5&nbsp;490&nbsp;₽ <s class="small text-body-secondary fw-normal">6&nbsp;490&nbsp;₽</s></p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Logitech G502 HERO</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="col">
+                <article class="card h-100 svr-card">
+                  <div class="position-relative">
+                    <img class="card-img-top svr-card__img" src="images/p-dualshock-4.jpg" width="800" height="600" alt="Беспроводной геймпад Sony DualShock 4 чёрного цвета" loading="lazy">
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <p class="small text-body-secondary mb-1">Геймпад</p>
+                    <h3 class="card-title h6 fw-bold">Sony DualShock 4</h3>
+                    <ul class="list-unstyled small text-body-secondary mb-3">
+                      <li>Bluetooth, вибрация, гироскоп</li>
+                      <li>Сенсорная панель</li>
+                      <li>Для PS4 и ПК</li>
+                    </ul>
+                    <div class="mt-auto d-flex align-items-end justify-content-between gap-2">
+                      <p class="svr-price mb-0 d-flex flex-column ">4&nbsp;990&nbsp;₽</p>
+                      <a class="btn btn-outline-primary btn-sm" href="product.html">Подробнее<span class="visually-hidden"> про Sony DualShock 4</span></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- Пагинация (статичная): все товары помещаются на одну страницу -->
+          <nav class="mt-5" aria-label="Страницы каталога">
+            <ul class="pagination justify-content-center mb-0">
+              <li class="page-item disabled"><span class="page-link">Назад</span></li>
+              <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+              <li class="page-item disabled"><span class="page-link">Вперёд</span></li>
+            </ul>
+          </nav>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="svr-footer bg-dark text-light-emphasis" data-bs-theme="dark">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-12 col-lg-4">
+          <a class="svr-logo svr-logo--light text-decoration-none" href="index.html">SVR</a>
+          <p class="small mt-3 mb-0">Собираем игровые ПК, продаём ноутбуки, наушники и периферию. Каждую сборку перед выдачей тестируем сутки.</p>
+        </div>
+        <nav class="col-6 col-md-4 col-lg-2" aria-label="Страницы сайта">
+          <h2 class="h6 text-white">Страницы</h2>
+          <ul class="list-unstyled small d-grid gap-2 mb-0">
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="index.html">Главная</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Каталог</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="product.html">SVR Gamer</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="order.html">Оформить заявку</a></li>
+          </ul>
+        </nav>
+        <nav class="col-6 col-md-4 col-lg-2" aria-label="Категории каталога">
+          <h2 class="h6 text-white">Каталог</h2>
+          <ul class="list-unstyled small d-grid gap-2 mb-0">
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Ноутбуки</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Игровые ПК</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Наушники</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Периферия</a></li>
+          </ul>
+        </nav>
+        <div class="col-12 col-md-4 col-lg-4">
+          <h2 class="h6 text-white">Связаться</h2>
+          <address class="small mb-0 d-grid gap-2">
+            <a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="tel:+74951234567">+7 (495) 123-45-67</a>
+            <a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="mailto:hello@svr-store.ru">hello@svr-store.ru</a>
+            <span>Москва, ул. Электрозаводская, 21</span>
+          </address>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-2 small">
+        <p class="mb-0">© 2026 SVR. Учебный проект: Кирбитов А. Е., группа ЭФБО-04-25.</p>
+        <p class="mb-0">Фото: Unsplash, Wikimedia Commons, Flickr — авторы и лицензии указаны в README.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (вместе с Popper): нужен для collapse, modal, carousel, tabs, offcanvas -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оформление заявки — SVR | Bootstrap-версия</title>
+  <meta name="description" content="Форма заявки SVR на Bootstrap: form-control, form-select, input-group, form-check.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <!-- Bootstrap подключён локально (без CDN): файлы лежат в vendor/ -->
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css?v=2">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css?v=2">
+  <!-- Свои стили подключаются ПОСЛЕ Bootstrap, чтобы переопределять его -->
+  <link rel="stylesheet" href="css/custom.css?v=2">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Компонент navbar: на экранах < lg меню сворачивается в кнопку (collapse из Bootstrap JS) -->
+  <nav class="navbar navbar-expand-lg bg-body sticky-top svr-navbar" aria-label="Основное меню">
+    <div class="container">
+      <a class="navbar-brand svr-logo" href="index.html">SVR</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Открыть меню">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-3 mb-lg-0 gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalog.html">Каталог</a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html">SVR Gamer</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="order.html">Оформить заявку</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contacts">Контакты</a></li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 gap-lg-3 pb-3 pb-lg-0">
+          <a class="link-body-emphasis text-decoration-none fw-semibold" href="tel:+74951234567"><i class="bi bi-telephone text-primary me-1" aria-hidden="true"></i>+7 (495) 123-45-67</a>
+          <a class="btn btn-primary" href="order.html">Оставить заявку</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1">
+    <div class="container">
+      <nav aria-label="Хлебные крошки" class="pt-4">
+        <ol class="breadcrumb small mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Оформление заявки</li>
+        </ol>
+      </nav>
+      <h1 class="h2 pt-3">Оформление заявки</h1>
+      <p class="text-body-secondary">Консультант перезвонит в&nbsp;течение 15&nbsp;минут в&nbsp;рабочее время. Оплата при получении.</p>
+
+      <!-- Сообщение об успешной отправке: показывается, когда в адресе есть #order-sent (CSS :target, без JS) -->
+      <div class="alert alert-success d-flex gap-3 align-items-start svr-sent" id="order-sent" role="status">
+        <i class="bi bi-check-circle fs-4" aria-hidden="true"></i>
+        <div>
+          <h2 class="h5 alert-heading">Заявка отправлена</h2>
+          <p class="mb-0">Спасибо! Консультант SVR перезвонит в&nbsp;течение 15&nbsp;минут. <span class="text-body-secondary">Учебный проект: данные никуда не&nbsp;отправляются.</span></p>
+        </div>
+      </div>
+
+      <div class="row g-4 g-lg-5 pb-5">
+        <div class="col-12 col-lg-8">
+          <form class="card svr-panel" action="order.html#order-sent" method="get">
+            <div class="card-body p-4">
+              <p class="small text-body-secondary">Поля со звёздочкой <span class="text-danger">*</span> обязательны.</p>
+              <fieldset class="mb-4">
+                <legend class="h5">Контактные данные</legend>
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label for="name" class="form-label">Имя <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" autocomplete="name" required minlength="2" placeholder="Например, Артём">
+                    <div class="invalid-feedback">Введите имя — хотя бы 2 буквы.</div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="phone" class="form-label">Телефон <span class="text-danger">*</span></label>
+                    <!-- input-group: поле с префиксом +7 -->
+                    <div class="input-group">
+                      <span class="input-group-text">+7</span>
+                      <input type="tel" class="form-control" id="phone" name="phone" autocomplete="tel" required pattern="[0-9\s\-\(\)]{10,15}" placeholder="999 123-45-67">
+                    </div>
+                    <div class="invalid-feedback">Номер из 10 цифр, например 999 123-45-67.</div>
+                  </div>
+                  <div class="col-12">
+                    <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+                      <input type="email" class="form-control" id="email" name="email" autocomplete="email" required placeholder="name@example.ru">
+                    </div>
+                    <div class="invalid-feedback">Проверьте адрес: в нём должны быть @ и домен.</div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="mb-4">
+                <legend class="h5">Что заказываете</legend>
+                <div class="row g-3">
+                  <div class="col-12 col-md-8">
+                    <label for="product" class="form-label">Товар <span class="text-danger">*</span></label>
+                    <!-- form-select: выпадающий список в стиле Bootstrap -->
+                    <select class="form-select" id="product" name="product" required>
+                      <option value="">Выберите товар</option>
+                    <optgroup label="Ноутбуки">
+                      <option value="rog-strix-g15">ASUS ROG Strix G15 G513QY — 99&nbsp;990&nbsp;₽</option>
+                      <option value="macbook-air-m2">Apple MacBook Air 13 M2 — 89&nbsp;990&nbsp;₽</option>
+                      <option value="dell-xps-13">Dell XPS 13 9300 — 74&nbsp;990&nbsp;₽</option>
+                    </optgroup>
+                    <optgroup label="Игровые ПК">
+                      <option value="svr-gamer" selected>SVR Gamer — 119&nbsp;990&nbsp;₽</option>
+                      <option value="svr-start">SVR Start — 64&nbsp;990&nbsp;₽</option>
+                      <option value="svr-studio">SVR Studio — 219&nbsp;990&nbsp;₽</option>
+                    </optgroup>
+                    <optgroup label="Наушники">
+                      <option value="sony-wh-1000xm4">Sony WH-1000XM4 — 24&nbsp;990&nbsp;₽</option>
+                      <option value="hyperx-cloud">HyperX Cloud Silver — 6&nbsp;990&nbsp;₽</option>
+                      <option value="airpods-pro">Apple AirPods Pro — 16&nbsp;990&nbsp;₽</option>
+                    </optgroup>
+                    <optgroup label="Периферия">
+                      <option value="keychron-k2">Keychron K2 — 8&nbsp;990&nbsp;₽</option>
+                      <option value="logitech-g502">Logitech G502 HERO — 5&nbsp;490&nbsp;₽</option>
+                      <option value="dualshock-4">Sony DualShock 4 — 4&nbsp;990&nbsp;₽</option>
+                    </optgroup>
+                    </select>
+                    <div class="invalid-feedback">Выберите товар из списка.</div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="qty" class="form-label">Количество</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="qty" name="quantity" min="1" max="5" value="1" required>
+                      <span class="input-group-text">шт.</span>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label for="topic" class="form-label">Тема заявки</label>
+                    <select class="form-select" id="topic" name="topic">
+                      <option value="buy">Покупка</option>
+                      <option value="config">Подбор или изменение конфигурации</option>
+                      <option value="tradein">Покупка с trade-in</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="mb-4">
+                <legend class="h5">Получение</legend>
+                <div class="mb-3">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="delivery" id="delivery-courier" value="courier" checked>
+                    <label class="form-check-label" for="delivery-courier">Доставка курьером</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="delivery" id="delivery-pickup" value="pickup">
+                    <label class="form-check-label" for="delivery-pickup">Самовывоз из шоурума</label>
+                  </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label for="address" class="form-label">Адрес доставки</label>
+                    <input type="text" class="form-control" id="address" name="address" autocomplete="address-line1" placeholder="Улица, дом, квартира">
+                    <div class="form-text">Не нужен, если заберёте заказ в шоуруме.</div>
+                  </div>
+                  <div class="col-12">
+                    <label for="comment" class="form-label">Комментарий</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Например: нужна белая подсветка и Wi-Fi-адаптер"></textarea>
+                  </div>
+                  <div class="col-12 col-md-7">
+                    <label for="promo" class="form-label">Промокод</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="promo" name="promo" placeholder="Если есть">
+                      <button class="btn btn-outline-secondary" type="button">Применить</button>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="consent" name="consent" value="yes" required>
+                <label class="form-check-label" for="consent">Согласен на обработку персональных данных <span class="text-danger">*</span></label>
+              </div>
+              <div class="form-check form-switch mb-4">
+                <input class="form-check-input" type="checkbox" role="switch" id="news" name="news" value="yes">
+                <label class="form-check-label" for="news">Сообщать о скидках на e-mail</label>
+              </div>
+              <div class="d-grid d-sm-flex gap-2">
+                <button class="btn btn-primary btn-lg" type="submit">Отправить заявку</button>
+                <button class="btn btn-outline-secondary btn-lg" type="reset">Очистить</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <aside class="col-12 col-lg-4" aria-labelledby="summary-title">
+          <div class="card svr-panel mb-4">
+            <div class="card-body p-4">
+              <h2 class="h5" id="summary-title">Ваш заказ</h2>
+              <img class="img-fluid rounded-3 my-3" src="images/p-svr-gamer.jpg" width="800" height="600" alt="" loading="lazy">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between px-0"><span>SVR Gamer</span><span>119&nbsp;990&nbsp;₽</span></li>
+                <li class="list-group-item d-flex justify-content-between px-0"><span>Доставка по Москве</span><span class="text-success">бесплатно</span></li>
+                <li class="list-group-item d-flex justify-content-between px-0 fw-bold"><span>Итого</span><span>119&nbsp;990&nbsp;₽</span></li>
+              </ul>
+            </div>
+          </div>
+          <!-- Дополнительный компонент: accordion -->
+          <h2 class="h5">Частые вопросы</h2>
+          <div class="accordion" id="faq">
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-0" aria-expanded="true" aria-controls="faq-0">Можно ли изменить комплектацию сборки?</button>
+                </h3>
+                <div id="faq-0" class="accordion-collapse collapse show" data-bs-parent="#faq">
+                  <div class="accordion-body small text-body-secondary">Да. Укажите пожелания в комментарии к заявке: консультант пересчитает цену и согласует замену комплектующих до сборки.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="false" aria-controls="faq-1">Сколько длится гарантия?</button>
+                </h3>
+                <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faq">
+                  <div class="accordion-body small text-body-secondary">На сборки SVR — 3 года, на ноутбуки, наушники и периферию — гарантия производителя, от 1 года.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2" aria-expanded="false" aria-controls="faq-2">Как проходит стресс-тест?</button>
+                </h3>
+                <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#faq">
+                  <div class="accordion-body small text-body-secondary">ПК 24&nbsp;часа работает под полной нагрузкой процессора и видеокарты. Отчёт с температурами и частотами кладём в коробку.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3" aria-expanded="false" aria-controls="faq-3">Можно забрать заказ самостоятельно?</button>
+                </h3>
+                <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#faq">
+                  <div class="accordion-body small text-body-secondary">Да, из шоурума на Электрозаводской. Готовые сборки выдаём в день заказа после 15:00.</div>
+                </div>
+              </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="svr-footer bg-dark text-light-emphasis" data-bs-theme="dark">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-12 col-lg-4">
+          <a class="svr-logo svr-logo--light text-decoration-none" href="index.html">SVR</a>
+          <p class="small mt-3 mb-0">Собираем игровые ПК, продаём ноутбуки, наушники и периферию. Каждую сборку перед выдачей тестируем сутки.</p>
+        </div>
+        <nav class="col-6 col-md-4 col-lg-2" aria-label="Страницы сайта">
+          <h2 class="h6 text-white">Страницы</h2>
+          <ul class="list-unstyled small d-grid gap-2 mb-0">
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="index.html">Главная</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Каталог</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="product.html">SVR Gamer</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="order.html">Оформить заявку</a></li>
+          </ul>
+        </nav>
+        <nav class="col-6 col-md-4 col-lg-2" aria-label="Категории каталога">
+          <h2 class="h6 text-white">Каталог</h2>
+          <ul class="list-unstyled small d-grid gap-2 mb-0">
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Ноутбуки</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Игровые ПК</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Наушники</a></li>
+            <li><a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="catalog.html">Периферия</a></li>
+          </ul>
+        </nav>
+        <div class="col-12 col-md-4 col-lg-4">
+          <h2 class="h6 text-white">Связаться</h2>
+          <address class="small mb-0 d-grid gap-2">
+            <a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="tel:+74951234567">+7 (495) 123-45-67</a>
+            <a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="mailto:hello@svr-store.ru">hello@svr-store.ru</a>
+            <span>Москва, ул. Электрозаводская, 21</span>
+          </address>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-2 small">
+        <p class="mb-0">© 2026 SVR. Учебный проект: Кирбитов А. Е., группа ЭФБО-04-25.</p>
+        <p class="mb-0">Фото: Unsplash, Wikimedia Commons, Flickr — авторы и лицензии указаны в README.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle (вместе с Popper): нужен для collapse, modal, carousel, tabs, offcanvas -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js?v=2"></script>
+</body>
+</html>
